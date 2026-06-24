@@ -3,25 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Companion | Financial Literacy Seminar</title>
+    <title>Student Companion | Alpha Innovation Partners</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Safe MathJax Setup -->
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['\\(', '\\)']],
-                displayMath: [['\\[', '\\]']]
-            },
-            svg: {
-                fontCache: 'global'
-            }
-        };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script>
         tailwind.config = {
@@ -95,17 +81,17 @@
                 
                 <!-- Company Branding Header -->
                 <div class="flex items-center gap-4">
-                    <img src="./logo.png" onerror="this.style.display='none'; document.getElementById('svg-logo-fallback').style.display='block';" class="h-14 w-auto object-contain" alt="Logo">
+                    <img src="./logo.png" onerror="this.style.display='none'; document.getElementById('svg-logo-fallback').style.display='block';" class="h-14 w-auto object-contain" alt="Alpha Innovation Partners Logo">
                     
                     <div id="svg-logo-fallback" class="flex items-center gap-3">
-                        <svg class="h-10 w-auto" viewBox="0 0 450 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="h-10 w-auto" viewBox="0 0 480 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g transform="translate(10, 10)">
                                 <path d="M40 0 C25 20, 15 50, 10 80 L25 80 C28 60, 34 30, 45 15 Z" fill="#00a2b1" />
                                 <path d="M42 0 L65 80 L50 80 L35 25 Z" fill="#ffffff" />
                                 <path d="M5 60 C15 50, 45 45, 75 55 C80 57, 65 68, 45 70 C25 72, 10 68, 5 60 Z" fill="#00a2b1" opacity="0.9" />
                             </g>
-                            <text x="100" y="42" font-family="'Inter', sans-serif" font-weight="800" font-size="22" fill="#ffffff" letter-spacing="1" class="val-company">FINANCIAL NETWORK</text>
-                            <text x="100" y="66" font-family="'Inter', sans-serif" font-weight="600" font-size="12" fill="#00a2b1" letter-spacing="4">EDUCATION & LITERACY</text>
+                            <text x="100" y="42" font-family="'Inter', sans-serif" font-weight="800" font-size="18" fill="#ffffff" letter-spacing="1" class="val-company">ALPHA INNOVATION PARTNERS</text>
+                            <text x="100" y="66" font-family="'Inter', sans-serif" font-weight="600" font-size="11" fill="#00a2b1" letter-spacing="4">FIDUCIARY WEALTH & EDUCATION</text>
                         </svg>
                     </div>
                 </div>
@@ -166,33 +152,33 @@
                         <i class="fa-solid fa-user-pen text-brand-teal text-lg"></i>
                         <div>
                             <h4 class="text-xs font-bold tracking-wider uppercase text-white">Presenter Setup</h4>
-                            <p class="text-[10px] text-slate-300">Type your details below to instantly update the page</p>
+                            <p class="text-[10px] text-slate-300">Type details below to dynamically update the live view</p>
                         </div>
                     </div>
                     <div class="p-4 space-y-3.5 text-xs">
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Presenter Name & Designations</label>
-                            <input type="text" id="input-name" value="YOUR NAME HERE" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                            <input type="text" id="input-name" value="Avi Crane, Financial Fiduciary" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Professional Title</label>
-                            <input type="text" id="input-title" value="YOUR TITLE HERE" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                            <input type="text" id="input-title" value="Investment Advisor Representative" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Company / Organization Network</label>
-                            <input type="text" id="input-company" value="YOUR COMPANY HERE" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Company / Advisor Network</label>
+                            <input type="text" id="input-company" value="Alpha Innovation Partners" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Your Direct Phone</label>
-                            <input type="text" id="input-phone" value="YOUR PHONE HERE" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                            <input type="text" id="input-phone" value="949-346-1459" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Your Professional Email</label>
-                            <input type="email" id="input-email" value="YOUR EMAIL HERE" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                            <input type="email" id="input-email" value="crane_avi@aipfinancial.net" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Corporate Address</label>
-                            <textarea id="input-address" rows="2" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">YOUR ADDRESS HERE</textarea>
+                            <textarea id="input-address" rows="2" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">100 Spectrum Center Drive, Suite 900&#10;Irvine, CA 92618</textarea>
                         </div>
                     </div>
                 </div>
@@ -200,24 +186,24 @@
                 <!-- ADVISOR LIVE CONTACT CARD -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                     <div class="bg-brand-navy p-4 text-white">
-                        <h4 class="text-xs font-bold tracking-widest text-brand-teal uppercase val-company">Your Organization</h4>
+                        <h4 class="text-xs font-bold tracking-widest text-brand-teal uppercase val-company">Alpha Innovation Partners</h4>
                         <p class="text-[10px] text-slate-300">Class Instructor Panel</p>
                     </div>
                     <div class="p-5 space-y-4 text-xs text-slate-600">
                         <div class="space-y-1">
-                            <p class="font-extrabold text-slate-950 text-sm val-name">Presenter Name</p>
-                            <p class="font-bold text-brand-blue val-title">Professional Title</p>
+                            <p class="font-extrabold text-slate-950 text-sm val-name">Avi Crane, Financial Fiduciary</p>
+                            <p class="font-bold text-brand-blue val-title">Investment Advisor Representative</p>
                         </div>
                         <div class="space-y-2 border-t pt-3">
                             <p class="flex items-center gap-2.5 font-medium">
-                                <i class="fa-solid fa-phone text-brand-teal text-sm w-4"></i> <span class="val-phone">Not Provided</span>
+                                <i class="fa-solid fa-phone text-brand-teal text-sm w-4"></i> <span class="val-phone">949-346-1459</span>
                             </p>
                             <p class="flex items-center gap-2.5 font-medium">
-                                <i class="fa-solid fa-envelope text-brand-teal text-sm w-4"></i> <span class="val-email">Not Provided</span>
+                                <i class="fa-solid fa-envelope text-brand-teal text-sm w-4"></i> <span class="val-email">crane_avi@aipfinancial.net</span>
                             </p>
                             <p class="flex items-start gap-2.5 font-medium">
                                 <i class="fa-solid fa-location-dot text-brand-teal text-sm w-4 mt-0.5"></i>
-                                <span class="val-address">No Address Entered</span>
+                                <span class="val-address">100 Spectrum Center Drive, Suite 900<br>Irvine, CA 92618</span>
                             </p>
                         </div>
                     </div>
@@ -302,7 +288,7 @@
                                     But let’s establish some cold, hard facts. Financial literacy education in America has been heavily commercialized. Many of the "free" personal finance seminars held on college campuses are funded by retail banking networks. These programs are customer-acquisition funnels designed to get you to open credit cards or invest in high-fee mutual funds. 
                                 </p>
                                 <p class="text-slate-700 font-medium">
-                                    As a fiduciary with <strong><span class="val-company">our educator group</span></strong>, I operate under a completely different standard. The Fiduciary Standard is a strict legal and ethical boundary governed by two key components: the <strong>Duty of Loyalty</strong> and the <strong>Duty of Care</strong>. By law, I am required to place your financial welfare above my own and my firm’s at all times. We do not sell proprietary credit cards, and we do not collect sales commissions on high-fee products. Today, we are here to analyze the personal finance landscape using objective, conflict-free mathematics.
+                                    As a fiduciary with <strong><span class="val-company">Alpha Innovation Partners</span></strong>, I operate under a completely different standard. The Fiduciary Standard is a strict legal and ethical boundary governed by two key components: the <strong>Duty of Loyalty</strong> and the <strong>Duty of Care</strong>. By law, I am required to place your financial welfare above my own and my firm’s at all times. We do not sell proprietary credit cards, and we do not collect sales commissions on high-fee products. Today, we are here to analyze the personal finance landscape using objective, conflict-free mathematics.
                                 </p>
                             </div>
                         </div>
@@ -359,18 +345,18 @@
                                 <p class="text-slate-700">
                                     To optimize your score, your Credit Utilization Ratio must stay strictly below 30%, and ideally below 10%. The formula is:
                                 </p>
-                                <div class="bg-slate-100 p-4 rounded-xl text-center font-mono font-bold text-brand-navy text-sm border border-slate-200">
-                                    \[\text{Credit Utilization Ratio} = \frac{\text{Total Outstanding Balances}}{\text{Total Credit Limits}} \times 100\]
+                                <div class="bg-slate-100 p-4 rounded-xl text-center font-mono font-bold text-brand-navy text-sm border border-slate-200 my-2">
+                                    Credit Utilization Ratio = (Total Outstanding Balances &divide; Total Credit Limits) &times; 100
                                 </div>
                                 <p class="text-slate-700">
-                                    If you carry a credit card balance from month to month, interest compounds. The mathematical formula for compound interest is:
+                                    If you carry a credit card balance from month to month, interest compounds. The mathematical formula for compound interest calculation is:
                                 </p>
-                                <div class="bg-slate-100 p-4 rounded-xl text-center font-mono font-bold text-brand-navy text-sm border border-slate-200">
-                                    \[A = P \left(1 + \frac{r}{n}\right)^{nt}\]
+                                <div class="bg-slate-100 p-4 rounded-xl text-center font-mono font-bold text-brand-navy text-sm border border-slate-200 my-2">
+                                    A = P &times; (1 + r/n)<sup>nt</sup>
                                 </div>
                                 <p class="text-slate-700 font-bold">Numerical Case Study (How Debt Multiplies):</p>
                                 <p class="text-slate-700 font-medium">
-                                    Suppose you carry a static balance of $2,500 (\(P\)) on a student credit card with a typical 24% APR (\(r = 0.24\)) compounded monthly (\(n = 12\)). If you make zero payments over 5 years (\(t = 5\)), let's calculate what happens:
+                                    Suppose you carry a static balance of $2,500 (P) on a student credit card with a typical 24% APR (r = 0.24) compounded monthly (n = 12). If you make zero payments over 5 years (t = 5), let's calculate what happens:
                                 </p>
                                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-xs max-w-md mx-auto text-slate-800 space-y-1">
                                     <p>A = 2500 &times; (1 + 0.24 / 12)<sup>12 &times; 5</sup></p>
@@ -522,7 +508,7 @@
         <!-- Footer -->
         <footer class="bg-brand-navy text-white py-6 border-t border-slate-800 mt-auto">
             <div class="max-w-7xl mx-auto px-4 text-center space-y-2 text-xs">
-                <p class="font-bold text-sm val-company">Financial Literacy Network</p>
+                <p class="font-bold text-sm val-company">Alpha Innovation Partners</p>
                 <p class="text-slate-400">Class companion resources generated strictly under objective, non-sponsored Fiduciary Standards of Care.</p>
             </div>
         </footer>
@@ -535,7 +521,7 @@
         <!-- Print Header block -->
         <div class="border-b-4 border-cyan-800 pb-6 flex justify-between items-start">
             <div class="space-y-2">
-                <h1 class="text-xl font-black text-slate-900 val-company">Your Organization</h1>
+                <h1 class="text-xl font-black text-slate-900 val-company">Alpha Innovation Partners</h1>
                 <p class="text-[10px] font-extrabold uppercase tracking-widest text-cyan-800">
                     Registered Education Program | Legal Fiduciary Standard of Care
                 </p>
@@ -543,7 +529,7 @@
             <div class="text-[10px] text-right space-y-0.5 text-slate-600">
                 <p class="font-extrabold text-slate-900 text-sm val-name">Avi Crane, Financial Fiduciary</p>
                 <p class="text-cyan-700 font-bold val-title">Investment Advisor Representative</p>
-                <p class="val-address">100 Spectrum Center Drive, Suite 900, Irvine, CA 92618/p>
+                <p class="val-address">100 Spectrum Center Drive, Suite 900<br>Irvine, CA 92618</p>
                 <p>Phone: <span class="val-phone">949-346-1459</span></p>
                 <p class="font-bold val-email">crane_avi@aipfinancial.net</p>
             </div>
@@ -608,7 +594,7 @@
                         To optimize your score, your Credit Utilization Ratio (outstanding balances divided by limits) should remain strictly below 30% (ideally under 10%). Carrying active card balances triggers **compound interest**, causing your balances to multiply exponentially:
                     </p>
                     <div class="bg-slate-50 p-3 rounded-lg border text-center font-mono text-xs text-slate-900 my-2 max-w-sm mx-auto">
-                        A = P ( 1 + r/n )<sup>nt</sup>
+                        A = P &times; (1 + r/n)<sup>nt</sup>
                     </div>
                     <p class="font-bold text-slate-900">Numerical Case Study (How Debt Multiplies):</p>
                     <p>
@@ -672,7 +658,7 @@
                 The financial information provided in this workbook is for educational purposes only and does not constitute specific investment advice. Past performance does not guarantee future results.
             </p>
             <p class="font-extrabold text-slate-600 val-company">
-                © 2026. All Rights Reserved.
+                © 2026 Alpha Innovation Partners. All Rights Reserved.
             </p>
         </div>
     </div>
@@ -729,6 +715,14 @@
             } else {
                 content.classList.add('hidden');
                 icon.classList.remove('rotate-180');
+            }
+        }
+
+        // Standard accordion initialization logic
+        function initAccordions() {
+            for (let i = 2; i <= 5; i++) {
+                const content = document.getElementById('content-' + i);
+                if (content) content.classList.add('hidden');
             }
         }
 
@@ -848,6 +842,7 @@
         }
 
         window.onload = function() {
+            initAccordions();
             updateContactInfo();
             calculateCompound();
         }
