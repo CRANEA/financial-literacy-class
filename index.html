@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Companion | Alpha Innovation Partners</title>
+    <title>Student Companion | Financial Literacy Seminar</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
@@ -29,7 +29,7 @@
                 extend: {
                     colors: {
                         brand: {
-                            navy: '#0a2540',     /* Alpha Innovation Partners Deep Navy */
+                            navy: '#0a2540',     /* Deep Premium Navy */
                             teal: '#00a2b1',     /* Teal Accent */
                             blue: '#1e84a1',     /* Secondary Blue */
                             lightBg: '#f4f9fb',  /* Light Grey/Teal Tint */
@@ -41,12 +41,11 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800&display=swap');
         body {
             font-family: 'Inter', sans-serif;
         }
         
-        /* Interactive Toggle Styles */
         .tab-content {
             display: none;
         }
@@ -54,7 +53,6 @@
             display: block;
         }
 
-        /* PRINT STYLING - Automatically formats a professional PDF layout when printing */
         @media print {
             .no-print {
                 display: none !important;
@@ -89,7 +87,7 @@
         <span id="toast-text" class="text-sm font-medium">Action completed successfully!</span>
     </div>
 
-    <!-- 1. DIGITAL WEB COMPANION VIEW (Hidden during PDF Printing) -->
+    <!-- 1. DIGITAL WEB COMPANION VIEW -->
     <div class="no-print flex-grow flex flex-col">
         <!-- Main Navbar -->
         <header class="bg-brand-navy text-white border-b-4 border-brand-teal shadow-md">
@@ -97,22 +95,22 @@
                 
                 <!-- Company Branding Header -->
                 <div class="flex items-center gap-4">
-                    <img src="./ALPHAPARTNERS%20-%20Copy.png" onerror="this.style.display='none'; document.getElementById('svg-logo-fallback').style.display='block';" class="h-14 w-auto object-contain" alt="Alpha Innovation Partners Logo">
+                    <img src="./logo.png" onerror="this.style.display='none'; document.getElementById('svg-logo-fallback').style.display='block';" class="h-14 w-auto object-contain" alt="Logo">
                     
-                    <div id="svg-logo-fallback" style="display:none;" class="flex items-center gap-3">
+                    <div id="svg-logo-fallback" class="flex items-center gap-3">
                         <svg class="h-10 w-auto" viewBox="0 0 450 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g transform="translate(10, 10)">
                                 <path d="M40 0 C25 20, 15 50, 10 80 L25 80 C28 60, 34 30, 45 15 Z" fill="#00a2b1" />
                                 <path d="M42 0 L65 80 L50 80 L35 25 Z" fill="#ffffff" />
                                 <path d="M5 60 C15 50, 45 45, 75 55 C80 57, 65 68, 45 70 C25 72, 10 68, 5 60 Z" fill="#00a2b1" opacity="0.9" />
                             </g>
-                            <text x="100" y="42" font-family="'Inter', sans-serif" font-weight="800" font-size="22" fill="#ffffff" letter-spacing="1">ALPHA INNOVATION PARTNERS</text>
-                            <text x="100" y="66" font-family="'Inter', sans-serif" font-weight="600" font-size="12" fill="#00a2b1" letter-spacing="4">NEXT GENERATION ADVISORS</text>
+                            <text x="100" y="42" font-family="'Inter', sans-serif" font-weight="800" font-size="22" fill="#ffffff" letter-spacing="1" class="val-company">FINANCIAL NETWORK</text>
+                            <text x="100" y="66" font-family="'Inter', sans-serif" font-weight="600" font-size="12" fill="#00a2b1" letter-spacing="4">EDUCATION & LITERACY</text>
                         </svg>
                     </div>
                 </div>
                 
-                <!-- PDF / DOC Export Buttons -->
+                <!-- Export Buttons -->
                 <div class="flex flex-wrap gap-2">
                     <button onclick="downloadWordDoc()" class="bg-brand-blue hover:bg-cyan-800 text-white font-bold text-xs px-4 py-3 rounded-xl shadow transition duration-150 flex items-center gap-2">
                         <i class="fa-solid fa-file-word text-sm"></i> Download Word Guide (.doc)
@@ -168,33 +166,33 @@
                         <i class="fa-solid fa-user-pen text-brand-teal text-lg"></i>
                         <div>
                             <h4 class="text-xs font-bold tracking-wider uppercase text-white">Presenter Setup</h4>
-                            <p class="text-[10px] text-slate-300">Update fields below to customize webpage & downloads</p>
+                            <p class="text-[10px] text-slate-300">Type your details below to instantly update the page</p>
                         </div>
                     </div>
                     <div class="p-4 space-y-3.5 text-xs">
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Presenter Name & Designations</label>
-                            <input type="text" id="input-name" value="Brian T. Amato, CFF®" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                            <input type="text" id="input-name" value="" placeholder="Your Name, Title" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Professional Title</label>
-                            <input type="text" id="input-title" value="Executive Vice President" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                            <input type="text" id="input-title" value="" placeholder="e.g., Lead Instructor" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Company / Advisor Network</label>
-                            <input type="text" id="input-company" value="Alpha Innovation Partners" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Company / Organization Network</label>
+                            <input type="text" id="input-company" value="" placeholder="Your Network Name" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Your Direct Phone</label>
-                            <input type="text" id="input-phone" value="(516) 932-5130" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                            <input type="text" id="input-phone" value="" placeholder="Phone Number" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Your Professional Email</label>
-                            <input type="email" id="input-email" value="info@alphainnovationpartners.com" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                            <input type="email" id="input-email" value="" placeholder="Email Address" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Corporate Address</label>
-                            <textarea id="input-address" rows="2" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">500 N. Broadway, Suite 260&#10;Jericho, NY 11753</textarea>
+                            <textarea id="input-address" rows="2" placeholder="Street Address, City, State" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white"></textarea>
                         </div>
                     </div>
                 </div>
@@ -202,24 +200,24 @@
                 <!-- ADVISOR LIVE CONTACT CARD -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                     <div class="bg-brand-navy p-4 text-white">
-                        <h4 class="text-xs font-bold tracking-widest text-brand-teal uppercase val-company">Alpha Innovation Partners</h4>
-                        <p class="text-[10px] text-slate-300">Registered Investment Advisor</p>
+                        <h4 class="text-xs font-bold tracking-widest text-brand-teal uppercase val-company">Your Organization</h4>
+                        <p class="text-[10px] text-slate-300">Class Instructor Panel</p>
                     </div>
                     <div class="p-5 space-y-4 text-xs text-slate-600">
                         <div class="space-y-1">
-                            <p class="font-extrabold text-slate-950 text-sm val-name">Brian T. Amato, CFF®</p>
-                            <p class="font-bold text-brand-blue val-title">Executive Vice President</p>
+                            <p class="font-extrabold text-slate-950 text-sm val-name">Presenter Name</p>
+                            <p class="font-bold text-brand-blue val-title">Professional Title</p>
                         </div>
                         <div class="space-y-2 border-t pt-3">
                             <p class="flex items-center gap-2.5 font-medium">
-                                <i class="fa-solid fa-phone text-brand-teal text-sm w-4"></i> <span class="val-phone">(516) 932-5130</span>
+                                <i class="fa-solid fa-phone text-brand-teal text-sm w-4"></i> <span class="val-phone">Not Provided</span>
                             </p>
                             <p class="flex items-center gap-2.5 font-medium">
-                                <i class="fa-solid fa-envelope text-brand-teal text-sm w-4"></i> <span class="val-email">info@alphainnovationpartners.com</span>
+                                <i class="fa-solid fa-envelope text-brand-teal text-sm w-4"></i> <span class="val-email">Not Provided</span>
                             </p>
                             <p class="flex items-start gap-2.5 font-medium">
                                 <i class="fa-solid fa-location-dot text-brand-teal text-sm w-4 mt-0.5"></i>
-                                <span class="val-address">500 N. Broadway, Suite 260<br>Jericho, NY 11753</span>
+                                <span class="val-address">No Address Entered</span>
                             </p>
                         </div>
                     </div>
@@ -304,7 +302,7 @@
                                     But let’s establish some cold, hard facts. Financial literacy education in America has been heavily commercialized. Many of the "free" personal finance seminars held on college campuses are funded by retail banking networks. These programs are customer-acquisition funnels designed to get you to open credit cards or invest in high-fee mutual funds. 
                                 </p>
                                 <p class="text-slate-700 font-medium">
-                                    As a fiduciary with <strong><span class="val-company">Alpha Innovation Partners</span></strong>, I operate under a completely different standard. The Fiduciary Standard is a strict legal and ethical boundary governed by two key components: the <strong>Duty of Loyalty</strong> and the <strong>Duty of Care</strong>. By law, I am required to place your financial welfare above my own and my firm’s at all times. We do not sell proprietary credit cards, and we do not collect sales commissions on high-fee products. Today, we are here to analyze the personal finance landscape using objective, conflict-free mathematics.
+                                    As a fiduciary with <strong><span class="val-company">our educator group</span></strong>, I operate under a completely different standard. The Fiduciary Standard is a strict legal and ethical boundary governed by two key components: the <strong>Duty of Loyalty</strong> and the <strong>Duty of Care</strong>. By law, I am required to place your financial welfare above my own and my firm’s at all times. We do not sell proprietary credit cards, and we do not collect sales commissions on high-fee products. Today, we are here to analyze the personal finance landscape using objective, conflict-free mathematics.
                                 </p>
                             </div>
                         </div>
@@ -524,32 +522,30 @@
         <!-- Footer -->
         <footer class="bg-brand-navy text-white py-6 border-t border-slate-800 mt-auto">
             <div class="max-w-7xl mx-auto px-4 text-center space-y-2 text-xs">
-                <p class="font-bold text-sm val-company">Alpha Innovation Partners</p>
+                <p class="font-bold text-sm val-company">Financial Literacy Network</p>
                 <p class="text-slate-400">Class companion resources generated strictly under objective, non-sponsored Fiduciary Standards of Care.</p>
             </div>
         </footer>
     </div>
 
 
-    <!-- 2. STATIC ACADEMIC HANDOUT COMPILER (Prints automatically as a multi-page PDF when user clicks Print/Save) -->
+    <!-- 2. STATIC ACADEMIC HANDOUT COMPILER -->
     <div class="hidden print-only bg-white text-slate-900 p-6 space-y-10 leading-relaxed">
         
         <!-- Print Header block -->
         <div class="border-b-4 border-cyan-800 pb-6 flex justify-between items-start">
             <div class="space-y-2">
-                <div class="flex items-center gap-3">
-                    <img src="./ALPHAPARTNERS - Copy.png" class="h-10 w-auto" alt="Company Logo">
-                </div>
+                <h1 class="text-xl font-black text-slate-900 val-company">Your Organization</h1>
                 <p class="text-[10px] font-extrabold uppercase tracking-widest text-cyan-800">
-                    Registered Investment Advisor | Legal Fiduciary Standard of Care
+                    Registered Education Program | Legal Fiduciary Standard of Care
                 </p>
             </div>
             <div class="text-[10px] text-right space-y-0.5 text-slate-600">
-                <p class="font-extrabold text-slate-900 text-sm val-name">Avi Crane. Financial Fiduciary</p>
-                <p class="text-cyan-700 font-bold val-title">Investment Advisor Representative</p>
-                <p class="val-address">100 Spectrum Center Drive, Suite 900, Irvine, CA 92628</p>
-                <p>Phone: <span class="val-phone">(949) 346-1459</span></p>
-                <p class="font-bold val-email">crane_avi@aipfinancial.net</p>
+                <p class="font-extrabold text-slate-900 text-sm val-name">Presenter Name</p>
+                <p class="text-cyan-700 font-bold val-title">Professional Title</p>
+                <p class="val-address">No Address Entered</p>
+                <p>Phone: <span class="val-phone">Not Provided</span></p>
+                <p class="font-bold val-email">Not Provided</p>
             </div>
         </div>
 
@@ -563,7 +559,7 @@
             </p>
         </div>
 
-        <!-- Curriculum Topics (Direct mirror of rich web content) -->
+        <!-- Curriculum Topics -->
         <div class="space-y-8 text-xs leading-relaxed text-slate-800">
             
             <!-- Module 1 -->
@@ -630,7 +626,7 @@
                 </div>
             </div>
 
-            <div class="page-break"></div> <!-- Forced layout split for professional PDF generation -->
+            <div class="page-break"></div>
 
             <!-- Module 4 -->
             <div class="space-y-1">
@@ -673,10 +669,10 @@
         <div class="mt-12 pt-6 border-t border-slate-200 text-[10px] text-slate-400 text-center space-y-2">
             <p class="font-bold uppercase tracking-wider text-slate-500">Educational Workbook Disclosure</p>
             <p>
-                The financial information provided in this workbook is for educational purposes only and does not constitute specific investment advice. Past performance does not guarantee future results. Please consult with a Certified Fiduciary at Alpha Innovation Partners regarding your unique financial situation before making final investment decisions.
+                The financial information provided in this workbook is for educational purposes only and does not constitute specific investment advice. Past performance does not guarantee future results.
             </p>
             <p class="font-extrabold text-slate-600 val-company">
-                © 2026 Alpha Innovation Partners. All Rights Reserved.
+                © 2026. All Rights Reserved.
             </p>
         </div>
     </div>
@@ -684,16 +680,14 @@
 
     <!-- Interactive Scripts -->
     <script class="no-print">
-        // Real-time customization controller
         function updateContactInfo() {
-            const name = document.getElementById('input-name').value || 'Brian T. Amato, CFF®';
-            const title = document.getElementById('input-title').value || 'Executive Vice President';
-            const company = document.getElementById('input-company').value || 'Alpha Innovation Partners';
-            const phone = document.getElementById('input-phone').value || '(516) 932-5130';
-            const email = document.getElementById('input-email').value || 'info@alphainnovationpartners.com';
-            const address = document.getElementById('input-address').value || '500 N. Broadway, Suite 260\nJericho, NY 11753';
+            const name = document.getElementById('input-name').value || 'Your Name';
+            const title = document.getElementById('input-title').value || 'Professional Title';
+            const company = document.getElementById('input-company').value || 'Your Organization Network';
+            const phone = document.getElementById('input-phone').value || 'Not Provided';
+            const email = document.getElementById('input-email').value || 'Not Provided';
+            const address = document.getElementById('input-address').value || 'No Address Entered';
 
-            // Propagate input variables automatically to all UI elements
             document.querySelectorAll('.val-name').forEach(el => el.textContent = name);
             document.querySelectorAll('.val-title').forEach(el => el.textContent = title);
             document.querySelectorAll('.val-company').forEach(el => el.textContent = company);
@@ -704,7 +698,6 @@
             });
         }
 
-        // Tab selection switcher
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
@@ -726,7 +719,6 @@
             }
         }
 
-        // Accordion switcher
         function toggleAccordion(id) {
             const content = document.getElementById('content-' + id);
             const icon = document.getElementById('icon-' + id);
@@ -749,7 +741,6 @@
             }, 3000);
         }
 
-        // Dynamic Compound Calculator Setup
         function switchScenario() {
             const scenario = document.getElementById('calc-scenario').value;
             if (scenario === 'debt') {
@@ -768,7 +759,6 @@
             calculateCompound();
         }
 
-        // Safe Compound Interest Calculator Engine
         function calculateCompound() {
             const scenario = document.getElementById('calc-scenario').value;
             const principal = parseFloat(document.getElementById('calc-principal').value) || 0;
@@ -778,7 +768,7 @@
             document.getElementById('years-display').textContent = years;
 
             if (scenario === 'debt') {
-                const n = 12; // Compounded monthly
+                const n = 12; 
                 const total = principal * Math.pow(1 + (rate / n), n * years);
                 const expansion = total - principal;
 
@@ -794,7 +784,7 @@
                 document.getElementById('out-total').textContent = total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 document.getElementById('out-explanation').textContent = `Carrying a balance of $${principal.toLocaleString()} at an average card rate of ${rate*100}% APR causes debt to multiply over ${years} years, expanding the terminal total to $${total.toLocaleString(undefined, {maximumFractionDigits:2})}.`;
             } else {
-                const n = 12; // Monthly investments
+                const n = 12; 
                 const monthlyRate = rate / n;
                 const totalMonths = n * years;
                 
@@ -822,16 +812,15 @@
             }
         }
 
-        // Dynamically compiles a beautiful Rich-Text file (.doc) directly from DOM nodes (No syntax vulnerabilities!)
         function downloadWordDoc() {
-            const name = document.getElementById('input-name').value;
-            const title = document.getElementById('input-title').value;
-            const company = document.getElementById('input-company').value;
-            const phone = document.getElementById('input-phone').value;
-            const email = document.getElementById('input-email').value;
-            const address = document.getElementById('input-address').value.replace(/\n/g, ', ');
+            const name = document.getElementById('input-name').value || 'Your Name';
+            const title = document.getElementById('input-title').value || 'Professional Title';
+            const company = document.getElementById('input-company').value || 'Your Organization Network';
+            const phone = document.getElementById('input-phone').value || 'Not Provided';
+            const email = document.getElementById('input-email').value || 'Not Provided';
+            const address = document.getElementById('input-address').value.replace(/\n/g, ', ') || 'No Address Entered';
 
-            const headerHTML = "<h1>" + company + "</h1><h3>Registered Investment Advisor</h3>" +
+            const headerHTML = "<h1>" + company + "</h1><h3>Educational Curriculum</h3>" +
                                "<p>Presenter: " + name + " (" + title + ")</p>" +
                                "<p>Contact: " + phone + " | " + email + " | " + address + "</p><hr/>";
 
@@ -858,7 +847,6 @@
             showToastNotification("Word Guide downloaded successfully!");
         }
 
-        // Init routines
         window.onload = function() {
             updateContactInfo();
             calculateCompound();
