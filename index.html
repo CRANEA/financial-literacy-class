@@ -3,22 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Companion: Collegiate Financial Literacy</title>
+    <title>Student Companion | Alpha Innovation Partners</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Safe MathJax Setup -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        fiduciary: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            500: '#0f172a', // Midnight Blue
-                            600: '#1e293b', 
-                            700: '#334155',
-                            accent: '#0d9488', // Aqua Teal
-                            gold: '#d97706', // Fiduciary Gold
+                        brand: {
+                            navy: '#0a2540',     /* Alpha Innovation Partners Deep Navy */
+                            teal: '#00a2b1',     /* Teal Accent */
+                            blue: '#1e84a1',     /* Secondary Blue */
+                            lightBg: '#f4f9fb',  /* Light Grey/Teal Tint */
+                            slateText: '#334155' /* Slate body text */
                         }
                     }
                 }
@@ -26,297 +41,692 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         body {
             font-family: 'Inter', sans-serif;
         }
+        
+        /* Interactive Toggle Styles */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* PRINT STYLING - Automatically formats a professional PDF layout when printing */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            body {
+                background: white !important;
+                color: #000000 !important;
+                font-size: 11pt !important;
+            }
+            .print-card {
+                border: 1px solid #e2e8f0 !important;
+                padding: 1.5rem !important;
+                border-radius: 0.5rem !important;
+                margin-bottom: 2rem !important;
+                page-break-inside: avoid;
+                background: white !important;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+        }
     </style>
 </head>
-<body class="bg-fiduciary-50 text-fiduciary-500 min-h-screen flex flex-col">
+<body class="bg-slate-50 text-brand-slateText min-h-screen flex flex-col">
 
-    <header class="bg-fiduciary-500 text-white shadow-md border-b-4 border-fiduciary-accent">
-        <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center space-x-3">
-                <div class="bg-fiduciary-accent text-white p-3 rounded-lg shadow-inner">
-                    <i class="fa-solid fa-shield-halved text-2xl"></i>
+    <!-- Toast notification box -->
+    <div id="toast" class="hidden fixed bottom-5 right-5 bg-brand-navy text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-3 z-50">
+        <i class="fa-solid fa-circle-check text-brand-teal"></i>
+        <span id="toast-text" class="text-sm font-medium">Action completed successfully!</span>
+    </div>
+
+    <!-- 1. DIGITAL WEB COMPANION VIEW (Hidden during PDF Printing) -->
+    <div class="no-print flex-grow flex flex-col">
+        <!-- Main Navbar -->
+        <header class="bg-brand-navy text-white border-b-4 border-brand-teal shadow-md">
+            <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                
+                <!-- Company Branding Header -->
+                <div class="flex items-center gap-4">
+                    <img src="./ALPHAPARTNERS%20-%20Copy.png" onerror="this.style.display='none'; document.getElementById('svg-logo-fallback').style.display='block';" class="h-14 w-auto object-contain" alt="Alpha Innovation Partners Logo">
+                    
+                    <div id="svg-logo-fallback" style="display:none;" class="flex items-center gap-3">
+                        <svg class="h-10 w-auto" viewBox="0 0 450 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g transform="translate(10, 10)">
+                                <path d="M40 0 C25 20, 15 50, 10 80 L25 80 C28 60, 34 30, 45 15 Z" fill="#00a2b1" />
+                                <path d="M42 0 L65 80 L50 80 L35 25 Z" fill="#ffffff" />
+                                <path d="M5 60 C15 50, 45 45, 75 55 C80 57, 65 68, 45 70 C25 72, 10 68, 5 60 Z" fill="#00a2b1" opacity="0.9" />
+                            </g>
+                            <text x="100" y="42" font-family="'Inter', sans-serif" font-weight="800" font-size="22" fill="#ffffff" letter-spacing="1">ALPHA INNOVATION PARTNERS</text>
+                            <text x="100" y="66" font-family="'Inter', sans-serif" font-weight="600" font-size="12" fill="#00a2b1" letter-spacing="4">NEXT GENERATION ADVISORS</text>
+                        </svg>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="text-2xl font-bold tracking-tight">Collegiate Financial Independence Roadmap</h1>
-                    <p class="text-xs text-teal-200">A Fiduciary-Standard Workshop Companion for Undergraduates</p>
+                
+                <!-- PDF / DOC Export Buttons -->
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="downloadWordDoc()" class="bg-brand-blue hover:bg-cyan-800 text-white font-bold text-xs px-4 py-3 rounded-xl shadow transition duration-150 flex items-center gap-2">
+                        <i class="fa-solid fa-file-word text-sm"></i> Download Word Guide (.doc)
+                    </button>
+                    <button onclick="window.print()" class="bg-brand-teal hover:bg-cyan-700 text-white font-bold text-xs px-4 py-3 rounded-xl shadow transition duration-150 flex items-center gap-2">
+                        <i class="fa-solid fa-file-pdf text-sm"></i> Print / Save Workbook (PDF)
+                    </button>
                 </div>
             </div>
-            <div>
-                <button onclick="downloadStudyGuide()" class="bg-fiduciary-gold hover:bg-amber-600 text-white text-xs font-bold px-4 py-2 rounded-lg shadow transition-all duration-150 flex items-center gap-2">
-                    <i class="fa-solid fa-download"></i> Download Class Study Guide
-                </button>
+        </header>
+
+        <!-- Dynamic Announcement Strip -->
+        <div class="bg-brand-lightBg border-b border-cyan-100 py-3 px-4">
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-xs text-brand-blue font-semibold gap-2">
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-brand-teal text-sm"></i> Fiduciary Standard of Care — Unbiased, Conflict-Free Academic Education
+                </span>
+                <span class="bg-white border border-cyan-200 px-3 py-1 rounded-full shadow-2xs">
+                    Target: College Undergraduate Seminars
+                </span>
             </div>
         </div>
-    </header>
 
-    <div class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-8">
-        
-        <aside class="w-full lg:w-64 flex-shrink-0">
-            <nav class="space-y-1 bg-white p-4 rounded-xl shadow-sm border border-slate-200 sticky top-8">
-                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mb-2">Class Sections</p>
-                
-                <button onclick="switchTab('dashboard')" id="btn-dashboard" class="tab-btn w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg bg-fiduciary-accent text-white transition-all duration-150">
-                    <i class="fa-solid fa-square-poll-vertical mr-3 text-lg w-5"></i>
-                    Money Realities
-                </button>
-
-                <button onclick="switchTab('guide')" id="btn-guide" class="tab-btn w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all duration-150">
-                    <i class="fa-solid fa-book-open mr-3 text-lg w-5"></i>
-                    Interactive Modules
-                </button>
-
-                <button onclick="switchTab('calculator')" id="btn-calculator" class="tab-btn w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all duration-150">
-                    <i class="fa-solid fa-chart-line mr-3 text-lg w-5"></i>
-                    Interactive Math Lab
-                </button>
-            </nav>
-        </aside>
-
-        <main class="flex-grow bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200 min-w-0">
+        <!-- Main Body Grid Layout -->
+        <div class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-8">
             
-            <div id="toast" class="hidden fixed bottom-5 right-5 bg-fiduciary-500 text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-3 z-50 transform translate-y-0 transition-all">
-                <i class="fa-solid fa-circle-check text-teal-400"></i>
-                <span id="toast-text" class="text-sm font-medium">Study guide downloaded!</span>
-            </div>
-
-            <section id="tab-dashboard" class="tab-content block space-y-6">
-                <div class="border-b border-slate-200 pb-4">
-                    <h2 class="text-2xl font-bold text-fiduciary-500">The Collegiate Money Landscape</h2>
-                    <p class="text-slate-500">Why objective, fiduciary-standard financial training is critical today.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-teal-50 p-5 rounded-xl border border-teal-100 flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs font-semibold text-teal-700 uppercase tracking-wider">The Knowledge Gap</span>
-                            <h3 class="text-4xl font-bold text-teal-800 mt-1">38%</h3>
-                        </div>
-                        <p class="text-xs text-slate-600 mt-4 leading-relaxed">Gen Z has an average score of only 38% correct answers on objective personal finance assessments, leaving them highly vulnerable to digital fraud.</p>
-                    </div>
-
-                    <div class="bg-red-50 p-5 rounded-xl border border-red-100 flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs font-semibold text-red-700 uppercase tracking-wider">Emergency Vulnerability</span>
-                            <h3 class="text-4xl font-bold text-red-800 mt-1">56%</h3>
-                        </div>
-                        <p class="text-xs text-slate-600 mt-4 leading-relaxed">56% of college students would struggle to find $500 in cash or credit to cover an unexpected medical or travel expense.</p>
-                    </div>
-
-                    <div class="bg-amber-50 p-5 rounded-xl border border-amber-100 flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs font-semibold text-amber-700 uppercase tracking-wider">Chronic Stress</span>
-                            <h3 class="text-4xl font-bold text-amber-800 mt-1">70%</h3>
-                        </div>
-                        <p class="text-xs text-slate-600 mt-4 leading-relaxed">7 in 10 students report feeling entirely overwhelmed by day-to-day financial choices, directly impacting their academic focus.</p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
-                    <h3 class="text-lg font-semibold text-fiduciary-500 mb-3 flex items-center">
-                        <i class="fa-solid fa-gavel text-fiduciary-accent mr-2"></i>
-                        The Fiduciary Shield
-                    </h3>
-                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
-                        Unlike traditional personal finance workshops sponsored by banks or credit card companies, this presentation follows the <strong>Fiduciary Standard of Care</strong>. Your presenter is legally and ethically bound by the <strong>Duty of Loyalty</strong> and <strong>Duty of Care</strong>—meaning there are no hidden product sales, referral bonuses, or financial agendas. Our only objective is to build your financial defenses.
-                    </p>
-                </div>
-            </section>
-
-            <section id="tab-guide" class="tab-content hidden space-y-6">
-                <div class="border-b border-slate-200 pb-4">
-                    <h2 class="text-2xl font-bold text-fiduciary-500">Workshop Modules</h2>
-                    <p class="text-slate-500">Click on any section below to reveal presentation notes, slide summaries, and practical steps.</p>
-                </div>
-
-                <div class="space-y-4">
+            <!-- Left Panel: Navigation & Interactive Presenter Configurator -->
+            <aside class="w-full lg:w-80 flex-shrink-0 space-y-6">
+                
+                <!-- Tab Controls -->
+                <nav class="space-y-1 bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest px-3 mb-3">Syllabus Directory</p>
                     
-                    <div class="border border-slate-200 rounded-lg overflow-hidden bg-white">
-                        <button onclick="toggleAccordion(1)" class="w-full flex justify-between items-center px-5 py-4 bg-slate-50 hover:bg-slate-100 transition-colors">
-                            <span class="font-bold text-slate-700 text-left"><span class="text-fiduciary-accent mr-2">01.</span> The Fiduciary Filter</span>
-                            <i id="icon-1" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
-                        </button>
-                        <div id="content-1" class="hidden p-5 border-t border-slate-200 text-sm space-y-3 leading-relaxed">
-                            <h4 class="font-semibold text-fiduciary-accent">Core Takeaway:</h4>
-                            <p class="text-slate-600">The most important question you can ask any advisor or digital recommendation is: <em>"How are you paid?"</em> Commission-based brokers are incentivized to sell products, whereas legal fiduciaries charge flat advisory fees and put your goals first.</p>
-                            <h4 class="font-semibold text-fiduciary-gold pt-2">Class Action Checklist:</h4>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-600">
-                                <li>Always verify if a financial planner is a fee-only fiduciary in writing.</li>
-                                <li>Disregard speculative investment recommendations on social media.</li>
-                            </ul>
+                    <button onclick="switchTab('dashboard')" id="btn-dashboard" class="tab-btn w-full flex items-center px-4 py-3 text-sm font-semibold rounded-xl bg-brand-navy text-white transition-all duration-150 shadow-xs">
+                        <i class="fa-solid fa-chart-line mr-3 text-lg w-5"></i>
+                        Collegiate Realities
+                    </button>
+
+                    <button onclick="switchTab('curriculum')" id="btn-curriculum" class="tab-btn w-full flex items-center px-4 py-3 text-sm font-semibold rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all duration-150">
+                        <i class="fa-solid fa-graduation-cap mr-3 text-lg w-5"></i>
+                        Class Slides & Scripts
+                    </button>
+
+                    <button onclick="switchTab('calculator')" id="btn-calculator" class="tab-btn w-full flex items-center px-4 py-3 text-sm font-semibold rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-all duration-150">
+                        <i class="fa-solid fa-calculator mr-3 text-lg w-5"></i>
+                        Compound Interest Lab
+                    </button>
+                </nav>
+
+                <!-- DYNAMIC PRESENTER CONFIGURATOR -->
+                <div class="bg-amber-50 rounded-2xl shadow-sm border border-amber-200 overflow-hidden">
+                    <div class="bg-brand-navy p-4 text-white flex items-center gap-2.5">
+                        <i class="fa-solid fa-user-pen text-brand-teal text-lg"></i>
+                        <div>
+                            <h4 class="text-xs font-bold tracking-wider uppercase text-white">Presenter Setup</h4>
+                            <p class="text-[10px] text-slate-300">Update fields below to customize webpage & downloads</p>
                         </div>
                     </div>
-
-                    <div class="border border-slate-200 rounded-lg overflow-hidden bg-white">
-                        <button onclick="toggleAccordion(2)" class="w-full flex justify-between items-center px-5 py-4 bg-slate-50 hover:bg-slate-100 transition-colors">
-                            <span class="font-bold text-slate-700 text-left"><span class="text-fiduciary-accent mr-2">02.</span> Cash Flow & The Deductions Leak</span>
-                            <i id="icon-2" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
-                        </button>
-                        <div id="content-2" class="hidden p-5 border-t border-slate-200 text-sm space-y-3 leading-relaxed">
-                            <h4 class="font-semibold text-fiduciary-accent">Core Takeaway:</h4>
-                            <p class="text-slate-600">Many new graduates miscalculate their pay because they mistake gross pay for take-home net pay. Taxes, social security (FICA), and benefits are automatically deducted from your paycheck before the cash lands in your account.</p>
-                            <h4 class="font-semibold text-fiduciary-gold pt-2">Class Action Checklist:</h4>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-600">
-                                <li>Separate emergency savings from your primary spending account.</li>
-                                <li>Build a $1,000 "Financial Firewall" to buffer against unexpected expenses.</li>
-                            </ul>
+                    <div class="p-4 space-y-3.5 text-xs">
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Presenter Name & Designations</label>
+                            <input type="text" id="input-name" value="Brian T. Amato, CFF®" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Professional Title</label>
+                            <input type="text" id="input-title" value="Executive Vice President" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Company / Advisor Network</label>
+                            <input type="text" id="input-company" value="Alpha Innovation Partners" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Your Direct Phone</label>
+                            <input type="text" id="input-phone" value="(516) 932-5130" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Your Professional Email</label>
+                            <input type="email" id="input-email" value="info@alphainnovationpartners.com" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Corporate Address</label>
+                            <textarea id="input-address" rows="2" oninput="updateContactInfo()" class="w-full border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal focus:outline-hidden bg-white">500 N. Broadway, Suite 260&#10;Jericho, NY 11753</textarea>
                         </div>
                     </div>
-
-                    <div class="border border-slate-200 rounded-lg overflow-hidden bg-white">
-                        <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center px-5 py-4 bg-slate-50 hover:bg-slate-100 transition-colors">
-                            <span class="font-bold text-slate-700 text-left"><span class="text-fiduciary-accent mr-2">03.</span> Under the Hood of FICO</span>
-                            <i id="icon-3" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
-                        </button>
-                        <div id="content-3" class="hidden p-5 border-t border-slate-200 text-sm space-y-3 leading-relaxed">
-                            <h4 class="font-semibold text-fiduciary-accent">Core Takeaway:</h4>
-                            <p class="text-slate-600">Your credit score (FICO) is not a rating of personal worth; it is a mathematical calculation of your default probability. Payment History (35%) and Amounts Owed/Utilization (30%) dictate the score. High-interest credit card debt can easily compound out of control if you make only the minimum payments.</p>
-                            <h4 class="font-semibold text-fiduciary-gold pt-2">Class Action Checklist:</h4>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-600">
-                                <li>Set up automated calendar alerts or autopay to protect your payment history.</li>
-                                <li>Keep credit card balances strictly below 30% of your total credit limit.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="border border-slate-200 rounded-lg overflow-hidden bg-white">
-                        <button onclick="toggleAccordion(4)" class="w-full flex justify-between items-center px-5 py-4 bg-slate-50 hover:bg-slate-100 transition-colors">
-                            <span class="font-bold text-slate-700 text-left"><span class="text-fiduciary-accent mr-2">04.</span> Modern Digital Debt Traps</span>
-                            <i id="icon-4" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
-                        </button>
-                        <div id="content-4" class="hidden p-5 border-t border-slate-200 text-sm space-y-3 leading-relaxed">
-                            <h4 class="font-semibold text-fiduciary-accent">Core Takeaway:</h4>
-                            <p class="text-slate-600">Buy Now, Pay Later (BNPL) plans utilize the "Numerosity Effect" to present small installment amounts (e.g., $150) rather than the true cost ($600). This lowers your cost perception, leading to stacked payments that turn into a silent, cash-depleting subscription.</p>
-                            <h4 class="font-semibold text-fiduciary-gold pt-2">Class Action Checklist:</h4>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-600">
-                                <li>Avoid using point-of-sale financing for lifestyle or luxury purchases.</li>
-                                <li>Analyze any recommendation critically before initiating short-term installment debt.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="border border-slate-200 rounded-lg overflow-hidden bg-white">
-                        <button onclick="toggleAccordion(5)" class="w-full flex justify-between items-center px-5 py-4 bg-slate-50 hover:bg-slate-100 transition-colors">
-                            <span class="font-bold text-slate-700 text-left"><span class="text-fiduciary-accent mr-2">05.</span> The Compound Wealth Engine</span>
-                            <i id="icon-5" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
-                        </button>
-                        <div id="content-5" class="hidden p-5 border-t border-slate-200 text-sm space-y-3 leading-relaxed">
-                            <h4 class="font-semibold text-fiduciary-accent">Core Takeaway:</h4>
-                            <p class="text-slate-600">For young adults, your absolute greatest financial asset is time. Compound interest behaves exponentially over decades. Utilizing a tax-sheltered account like a Roth IRA and investing in broad-market index funds is the safest, most effective way to leverage your time horizon.</p>
-                            <h4 class="font-semibold text-fiduciary-gold pt-2">Class Action Checklist:</h4>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-600">
-                                <li>Aim to capture any available employer matching contributions as soon as you enter the workforce.</li>
-                                <li>Prioritize low-cost index funds over actively managed mutual funds with high hidden fees.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <section id="tab-calculator" class="tab-content hidden space-y-6">
-                <div class="border-b border-slate-200 pb-4">
-                    <h2 class="text-2xl font-bold text-fiduciary-500">Interactive Math Lab</h2>
-                    <p class="text-slate-500">Run calculations dynamically to understand how compounding works either for you or against you.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-4">
-                        <h3 class="font-bold text-lg text-fiduciary-accent">Input Parameters</h3>
-                        
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-600 mb-1">Interactive Scenario</label>
-                            <select id="calc-scenario" onchange="switchScenario()" class="w-full border border-slate-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-fiduciary-accent">
-                                <option value="debt">Credit Card Debt (Compounding Against You)</option>
-                                <option value="savings">Roth IRA Savings (Compounding For You)</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label id="label-principal" class="block text-sm font-semibold text-slate-600 mb-1">Initial Balance ($)</label>
-                            <input type="number" id="calc-principal" value="1000" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-fiduciary-accent" oninput="calculateCompound()">
-                        </div>
-
-                        <div>
-                            <label id="label-rate" class="block text-sm font-semibold text-slate-600 mb-1">Interest Rate / APR (%)</label>
-                            <input type="number" id="calc-rate" value="22" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-fiduciary-accent" oninput="calculateCompound()">
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-600 mb-1">Time Elapsed (Years)</label>
-                            <input type="range" id="calc-years" min="1" max="40" value="5" class="w-full accent-fiduciary-accent" oninput="calculateCompound()">
-                            <div class="text-right text-xs font-bold text-fiduciary-accent"><span id="years-display">5</span> Years</div>
-                        </div>
+                <!-- ADVISOR LIVE CONTACT CARD -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-brand-navy p-4 text-white">
+                        <h4 class="text-xs font-bold tracking-widest text-brand-teal uppercase val-company">Alpha Innovation Partners</h4>
+                        <p class="text-[10px] text-slate-300">Registered Investment Advisor</p>
                     </div>
-
-                    <div class="bg-fiduciary-600 text-white p-6 rounded-xl flex flex-col justify-between shadow-md">
-                        <div>
-                            <h3 class="font-bold text-lg border-b border-slate-700 pb-2 mb-4 flex items-center gap-2">
-                                <i class="fa-solid fa-calculator text-fiduciary-gold"></i>
-                                <span id="output-title">Mathematical Projections</span>
-                            </h3>
-                            <div class="space-y-4">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-sm text-slate-300">Initial Principal:</span>
-                                    <span class="font-semibold text-slate-100">$<span id="out-original">1,000.00</span></span>
-                                </div>
-                                <div class="flex justify-between items-center" id="interest-color-box">
-                                    <span class="text-sm" id="out-interest-label">Total Cost Expansion:</span>
-                                    <span class="font-bold">+$<span id="out-interest">1,971.01</span></span>
-                                </div>
-                                <div class="flex justify-between items-center border-t border-slate-700 pt-3 text-xl font-bold">
-                                    <span>Ending Total:</span>
-                                    <span class="text-fiduciary-gold">$<span id="out-total">2,971.01</span></span>
-                                </div>
-                            </div>
+                    <div class="p-5 space-y-4 text-xs text-slate-600">
+                        <div class="space-y-1">
+                            <p class="font-extrabold text-slate-950 text-sm val-name">Brian T. Amato, CFF®</p>
+                            <p class="font-bold text-brand-blue val-title">Executive Vice President</p>
                         </div>
-
-                        <div class="mt-6 pt-4 border-t border-slate-700">
-                            <p class="text-xs text-slate-300 leading-relaxed italic" id="out-explanation">
-                                Assuming compound interest compounds monthly without any additional principal payments, your debt will swell significantly over 5 years.
+                        <div class="space-y-2 border-t pt-3">
+                            <p class="flex items-center gap-2.5 font-medium">
+                                <i class="fa-solid fa-phone text-brand-teal text-sm w-4"></i> <span class="val-phone">(516) 932-5130</span>
+                            </p>
+                            <p class="flex items-center gap-2.5 font-medium">
+                                <i class="fa-solid fa-envelope text-brand-teal text-sm w-4"></i> <span class="val-email">info@alphainnovationpartners.com</span>
+                            </p>
+                            <p class="flex items-start gap-2.5 font-medium">
+                                <i class="fa-solid fa-location-dot text-brand-teal text-sm w-4 mt-0.5"></i>
+                                <span class="val-address">500 N. Broadway, Suite 260<br>Jericho, NY 11753</span>
                             </p>
                         </div>
                     </div>
                 </div>
-            </section>
+            </aside>
 
-        </main>
+            <!-- Right Panel: Interactive Canvas Area -->
+            <main class="flex-grow bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200 min-w-0">
+                
+                <!-- TAB 1: COLLEGIATE REALITIES -->
+                <section id="tab-dashboard" class="tab-content active space-y-6">
+                    <div class="border-b border-slate-200 pb-4">
+                        <h2 class="text-2xl font-extrabold text-brand-navy">The Collegiate Financial Landscape</h2>
+                        <p class="text-slate-500">Why objective, fiduciary-standard guidance is critical for your generation.</p>
+                    </div>
+
+                    <!-- Macro Statistics Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-rose-50 p-6 rounded-xl border border-rose-100 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-bold text-rose-700 uppercase tracking-widest">Financial Literacy Rate</span>
+                                <h3 class="text-5xl font-extrabold text-rose-800 mt-2">38%</h3>
+                            </div>
+                            <p class="text-xs text-rose-950 mt-4 leading-relaxed">Only 38% of Gen Z can pass standard personal finance assessments, creating massive vulnerabilities to high-cost credit cards.</p>
+                        </div>
+
+                        <div class="bg-amber-50 p-6 rounded-xl border border-amber-100 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-bold text-amber-700 uppercase tracking-widest">Undergrad Money Stress</span>
+                                <h3 class="text-5xl font-extrabold text-amber-800 mt-2">70%</h3>
+                            </div>
+                            <p class="text-xs text-amber-950 mt-4 leading-relaxed">70% of current students cite day-to-day money choices as their primary source of severe psychological and academic distress.</p>
+                        </div>
+
+                        <div class="bg-brand-lightBg p-6 rounded-xl border border-cyan-100 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-bold text-brand-blue uppercase tracking-widest">Emergency Vulnerability</span>
+                                <h3 class="text-5xl font-extrabold text-brand-navy mt-2">56%</h3>
+                            </div>
+                            <p class="text-xs text-brand-navy mt-4 leading-relaxed">Over half of all students do not have $500 in liquid capital to cover an unexpected medical or emergency expense.</p>
+                        </div>
+                    </div>
+
+                    <!-- Narrative Protection Callout -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-4">
+                        <h3 class="text-lg font-bold text-brand-navy flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-brand-teal"></i>
+                            Your Fiduciary Shield: Your Protection Against Bias
+                        </h3>
+                        <p class="text-sm text-brand-slateText leading-relaxed">
+                            Most college personal finance content is funded by commercial institutions seeking account acquisitions. Our legal Fiduciary Standard mandates complete loyalty to your welfare.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- TAB 2: INTERACTIVE SYLLABUS LESSONS -->
+                <section id="tab-curriculum" class="tab-content space-y-6">
+                    <div class="border-b border-slate-200 pb-4">
+                        <h2 class="text-2xl font-extrabold text-brand-navy">Class Slides & Complete Scripts</h2>
+                        <p class="text-slate-500">Click on any section below to expand the complete verbal lecture scripts, study formulas, and worksheets.</p>
+                    </div>
+
+                    <div class="space-y-4" id="handbook-content">
+                        <!-- Module 1 -->
+                        <div class="border border-slate-200 rounded-xl overflow-hidden shadow-xs bg-white print-card">
+                            <button onclick="toggleAccordion(1)" class="w-full flex justify-between items-center px-6 py-4 bg-slate-50 hover:bg-slate-100 transition-colors no-print">
+                                <span class="font-extrabold text-brand-navy text-left flex items-center gap-2">
+                                    <span class="bg-brand-teal text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
+                                    The Fiduciary Filter: Separating Advice from Hype
+                                </span>
+                                <i id="icon-1" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                            </button>
+                            <div class="px-6 py-4 border-b border-slate-100 bg-brand-lightBg flex justify-between items-center flex-wrap gap-2 no-print">
+                                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 1 (0:00 - 0:10)</span>
+                            </div>
+                            <div id="content-1" class="p-6 border-t border-slate-200 text-sm space-y-4 leading-relaxed bg-white">
+                                <p class="font-bold text-slate-900 text-base">Class Lesson Script:</p>
+                                <p class="text-slate-700 font-medium">
+                                    If you open any social media app right now, you are going to be flooded with self-proclaimed "finfluencers" telling you to buy crypto, trade options, or open accounts with trendy fintech companies. 
+                                </p>
+                                <p class="text-slate-700 font-medium">
+                                    But let’s establish some cold, hard facts. Financial literacy education in America has been heavily commercialized. Many of the "free" personal finance seminars held on college campuses are funded by retail banking networks. These programs are customer-acquisition funnels designed to get you to open credit cards or invest in high-fee mutual funds. 
+                                </p>
+                                <p class="text-slate-700 font-medium">
+                                    As a fiduciary with <strong><span class="val-company">Alpha Innovation Partners</span></strong>, I operate under a completely different standard. The Fiduciary Standard is a strict legal and ethical boundary governed by two key components: the <strong>Duty of Loyalty</strong> and the <strong>Duty of Care</strong>. By law, I am required to place your financial welfare above my own and my firm’s at all times. We do not sell proprietary credit cards, and we do not collect sales commissions on high-fee products. Today, we are here to analyze the personal finance landscape using objective, conflict-free mathematics.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Module 2 -->
+                        <div class="border border-slate-200 rounded-xl overflow-hidden shadow-xs bg-white print-card">
+                            <button onclick="toggleAccordion(2)" class="w-full flex justify-between items-center px-6 py-4 bg-slate-50 hover:bg-slate-100 transition-colors no-print">
+                                <span class="font-extrabold text-brand-navy text-left flex items-center gap-2">
+                                    <span class="bg-brand-teal text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
+                                    Gross vs. Net Pay: The Deductions Leak
+                                </span>
+                                <i id="icon-2" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                            </button>
+                            <div class="px-6 py-4 border-b border-slate-100 bg-brand-lightBg flex justify-between items-center flex-wrap gap-2 no-print">
+                                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 2 (0:10 - 0:25)</span>
+                            </div>
+                            <div id="content-2" class="p-6 border-t border-slate-200 text-sm space-y-4 leading-relaxed bg-white">
+                                <p class="font-bold text-slate-900 text-base">Class Lesson Script:</p>
+                                <p class="text-slate-700">
+                                    Let’s walk through a scenario that many of you will face very soon: landing your first job after graduation. Imagine you receive an offer letter that reads: <em>"Starting Salary: $60,000 per year."</em> Naturally, your brain does some quick math and says, "Awesome, I have $5,000 a month to spend." 
+                                </p>
+                                <p class="text-slate-700">
+                                    But when your first paycheck clears, you find that only $3,500 has actually hit your bank account. Where did the other $1,500 go? 
+                                </p>
+                                <p class="text-slate-700">
+                                    This is what we call the <strong>Deductions Leak</strong>. Before your money ever reaches your account, statutory taxes are stripped away. Under FICA—the Federal Insurance Contributions Act—6.2% is deducted for Social Security, and 1.45% is taken for Medicare. Next, progressive federal income taxes, along with state and local withholdings, claim their share. 
+                                </p>
+                                <p class="text-slate-700 font-bold">
+                                    Because of this, the first fiduciary rule of budgeting is: Never build a lifestyle budget around your gross salary. Your only reliable, spendable baseline is your net take-home pay.
+                                </p>
+                                <p class="text-slate-700">
+                                    Furthermore, statistics show that 56% of college students are unable to find $500 in liquid capital to cover an unexpected emergency medical or car expense. To bypass the predatory debt cycle, your immediate goal upon graduation must be to establish a $1,000 liquid financial firewall. Keep this buffer in a High-Yield Savings Account (HYSA) separate from your primary transaction account, so that it earns interest and maintains purchasing power against inflation.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Module 3 -->
+                        <div class="border border-slate-200 rounded-xl overflow-hidden shadow-xs bg-white print-card">
+                            <button onclick="toggleAccordion(3)" class="w-full flex justify-between items-center px-6 py-4 bg-slate-50 hover:bg-slate-100 transition-colors no-print">
+                                <span class="font-extrabold text-brand-navy text-left flex items-center gap-2">
+                                    <span class="bg-brand-teal text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
+                                    The FICO Score Matrix & Compound Debt Gravity
+                                </span>
+                                <i id="icon-3" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                            </button>
+                            <div class="px-6 py-4 border-b border-slate-100 bg-brand-lightBg flex justify-between items-center flex-wrap gap-2 no-print">
+                                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 3 (0:25 - 0:45)</span>
+                            </div>
+                            <div id="content-3" class="p-6 border-t border-slate-200 text-sm space-y-4 leading-relaxed bg-white">
+                                <p class="font-bold text-slate-900 text-base">Class Lesson Script:</p>
+                                <p class="text-slate-700">
+                                    Let’s demystify credit. Your credit score—commonly your FICO score—is not a measurement of your net worth or wealth. It is a mathematical prediction of your risk of defaulting on a loan. The scoring algorithm evaluates five primary components: Payment History (35%), Credit Utilization (30%), Length of Credit History (15%), New Credit (10%), and Credit Mix (10%).
+                                </p>
+                                <p class="text-slate-700">
+                                    To optimize your score, your Credit Utilization Ratio must stay strictly below 30%, and ideally below 10%. The formula is:
+                                </p>
+                                <div class="bg-slate-100 p-4 rounded-xl text-center font-mono font-bold text-brand-navy text-sm border border-slate-200">
+                                    \[\text{Credit Utilization Ratio} = \frac{\text{Total Outstanding Balances}}{\text{Total Credit Limits}} \times 100\]
+                                </div>
+                                <p class="text-slate-700">
+                                    If you carry a credit card balance from month to month, interest compounds. The mathematical formula for compound interest is:
+                                </p>
+                                <div class="bg-slate-100 p-4 rounded-xl text-center font-mono font-bold text-brand-navy text-sm border border-slate-200">
+                                    \[A = P \left(1 + \frac{r}{n}\right)^{nt}\]
+                                </div>
+                                <p class="text-slate-700 font-bold">Numerical Case Study (How Debt Multiplies):</p>
+                                <p class="text-slate-700 font-medium">
+                                    Suppose you carry a static balance of $2,500 (\(P\)) on a student credit card with a typical 24% APR (\(r = 0.24\)) compounded monthly (\(n = 12\)). If you make zero payments over 5 years (\(t = 5\)), let's calculate what happens:
+                                </p>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-xs max-w-md mx-auto text-slate-800 space-y-1">
+                                    <p>A = 2500 &times; (1 + 0.24 / 12)<sup>12 &times; 5</sup></p>
+                                    <p>A = 2500 &times; (1.02)<sup>60</sup></p>
+                                    <p>A = 2500 &times; 3.28103</p>
+                                    <p>A &approx; <span class="text-rose-700 font-extrabold">$8,202.58</span></p>
+                                </div>
+                                <p class="text-slate-700">
+                                    Your initial $2,500 purchase has exploded to <strong>$8,202.58</strong>. You are paying <strong>$5,702.58 in pure interest</strong>—more than double what you originally spent. This is compounding interest working <em>against</em> you.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Module 4 -->
+                        <div class="border border-slate-200 rounded-xl overflow-hidden shadow-xs bg-white print-card">
+                            <button onclick="toggleAccordion(4)" class="w-full flex justify-between items-center px-6 py-4 bg-slate-50 hover:bg-slate-100 transition-colors no-print">
+                                <span class="font-extrabold text-brand-navy text-left flex items-center gap-2">
+                                    <span class="bg-brand-teal text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
+                                    Modern Digital Traps: The Numerosity Illusion
+                                </span>
+                                <i id="icon-4" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                            </button>
+                            <div class="px-6 py-4 border-b border-slate-100 bg-brand-lightBg flex justify-between items-center flex-wrap gap-2 no-print">
+                                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 4 (0:45 - 0:50)</span>
+                            </div>
+                            <div id="content-4" class="p-6 border-t border-slate-200 text-sm space-y-4 leading-relaxed bg-white">
+                                <p class="font-bold text-slate-900 text-base">Class Lesson Script:</p>
+                                <p class="text-slate-700">
+                                    Modern fintech platforms are designed to exploit human behavioral psychology. You have all seen "Buy Now, Pay Later" (BNPL) options at online checkouts. They leverage a cognitive bias called the <strong>Numerosity Effect</strong>. 
+                                </p>
+                                <p class="text-slate-700">
+                                    The human brain naturally registers smaller, more frequent numbers as significantly cheaper than single large numbers. When an app shows a jacket for $100, your brain hesitates. But when it shows "4 easy payments of $25," your spending resistance instantly drops. 
+                                </p>
+                                <p class="text-slate-700 font-semibold">
+                                    Because the barrier to entry is so low, students stack multiple BNPL transactions across different apps. Over time, these small installment plans accumulate, quietly draining your weekly net income. 
+                                </p>
+                                <p class="text-slate-750">
+                                    As a fiduciary, my behavioral rule for discretionary spending is simple: If you cannot afford to purchase a non-essential item in full using cash today, you cannot afford it.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Module 5 -->
+                        <div class="border border-slate-200 rounded-xl overflow-hidden shadow-xs bg-white print-card">
+                            <button onclick="toggleAccordion(5)" class="w-full flex justify-between items-center px-6 py-4 bg-slate-50 hover:bg-slate-100 transition-colors no-print">
+                                <span class="font-extrabold text-brand-navy text-left flex items-center gap-2">
+                                    <span class="bg-brand-teal text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">5</span>
+                                    The Compound Wealth Engine: Roth IRAs
+                                </span>
+                                <i id="icon-5" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
+                            </button>
+                            <div class="px-6 py-4 border-b border-slate-100 bg-brand-lightBg flex justify-between items-center flex-wrap gap-2 no-print">
+                                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 5 (0:50 - 1:00)</span>
+                            </div>
+                            <div id="content-5" class="p-6 border-t border-slate-200 text-sm space-y-4 leading-relaxed bg-white">
+                                <p class="font-bold text-slate-900 text-base">Class Lesson Script:</p>
+                                <p class="text-slate-700">
+                                    We have looked at how compounding interest can devastate your finances when you carry debt. Now, let’s look at how compounding can work as a powerful engine to build long-term wealth. 
+                                </p>
+                                <p class="text-slate-700">
+                                    As college undergraduates, your greatest asset is not the size of your current bank account—it is <strong>time</strong>. When you invest early, compound growth behaves exponentially. 
+                                </p>
+                                <p class="text-slate-700">
+                                    The ideal wealth-building vehicle for young investors is a <strong>Roth IRA</strong>. Unlike traditional retirement accounts, contributions to a Roth IRA are made with post-tax dollars. This means that your assets grow entirely tax-free, and qualifying withdrawals in retirement are also 100% tax-free.
+                                </p>
+                                <p class="text-slate-700 font-semibold">
+                                    Under fiduciary principles, we avoid dynamic day-trading or stock speculation. Instead, we advocate for low-cost, broad-market index funds. 
+                                </p>
+                                <p class="text-slate-750">
+                                    Active mutual fund managers charge high expense ratios (often 1.5% or more) and rarely beat the average market return. Low-cost index funds track the overall market for a fraction of the cost—frequently under 0.05% annually. Over a thirty-year career, avoiding high management fees can save you hundreds of thousands of dollars.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 3: DYNAMIC MATH LAB -->
+                <section id="tab-calculator" class="tab-content space-y-6">
+                    <div class="border-b border-slate-200 pb-4">
+                        <h2 class="text-2xl font-extrabold text-brand-navy">Interactive Compound Lab</h2>
+                        <p class="text-slate-500">Run actual numerical simulations to see how compounding interest can either act as a financial anchor or a wealth engine.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Inputs -->
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-4">
+                            <h3 class="font-bold text-lg text-brand-navy">Interactive Parameters</h3>
+                            
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Choose Direction</label>
+                                <select id="calc-scenario" onchange="switchScenario()" class="w-full border border-slate-300 rounded-lg p-2.5 bg-white font-semibold text-slate-800 focus:ring-2 focus:ring-brand-teal">
+                                    <option value="debt">Credit Card Balance (Compounding Against You)</option>
+                                    <option value="savings">Roth IRA Investments (Compounding For You)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label id="label-principal" class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Starting Balance ($)</label>
+                                <input type="number" id="calc-principal" value="1000" class="w-full border border-slate-300 rounded-lg p-2 font-bold focus:ring-2 focus:ring-brand-teal text-slate-800" oninput="calculateCompound()">
+                            </div>
+
+                            <div>
+                                <label id="label-rate" class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Annual Interest Rate / APR (%)</label>
+                                <input type="number" id="calc-rate" value="22" class="w-full border border-slate-300 rounded-lg p-2 font-bold focus:ring-2 focus:ring-brand-teal text-slate-800" oninput="calculateCompound()">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Time Horizon (Years)</label>
+                                <input type="range" id="calc-years" min="1" max="40" value="5" class="w-full accent-brand-teal cursor-pointer" oninput="calculateCompound()">
+                                <div class="text-right text-xs font-bold text-brand-teal"><span id="years-display">5</span> Years</div>
+                            </div>
+                        </div>
+
+                        <!-- Outputs / Visuals -->
+                        <div class="bg-brand-navy text-white p-6 rounded-2xl flex flex-col justify-between shadow-lg">
+                            <div>
+                                <h3 class="font-bold text-lg border-b border-slate-700 pb-2 mb-4 flex items-center gap-2">
+                                    <i class="fa-solid fa-calculator text-brand-teal"></i>
+                                    <span id="output-title">Mathematical Impact</span>
+                                </h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-slate-300">Initial Principal:</span>
+                                        <span class="font-semibold text-slate-100">$<span id="out-original">1,000.00</span></span>
+                                    </div>
+                                    <div class="flex justify-between items-center font-bold" id="interest-color-box">
+                                        <span class="text-sm text-slate-300" id="out-interest-label">Total Interest Accumulated:</span>
+                                        <span class="font-extrabold text-lg">+$<span id="out-interest">1,971.01</span></span>
+                                    </div>
+                                    <div class="flex justify-between items-center border-t border-slate-700 pt-3 text-2xl font-extrabold">
+                                        <span>Terminal Total:</span>
+                                        <span class="text-brand-teal">$<span id="out-total">2,971.01</span></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 pt-4 border-t border-slate-700">
+                                <p class="text-xs text-slate-300 leading-relaxed italic font-medium" id="out-explanation">
+                                    At a 22% rate without regular monthly payments, your debt compounds monthly and swells dramatically.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-brand-navy text-white py-6 border-t border-slate-800 mt-auto">
+            <div class="max-w-7xl mx-auto px-4 text-center space-y-2 text-xs">
+                <p class="font-bold text-sm val-company">Alpha Innovation Partners</p>
+                <p class="text-slate-400">Class companion resources generated strictly under objective, non-sponsored Fiduciary Standards of Care.</p>
+            </div>
+        </footer>
     </div>
 
-    <footer class="bg-fiduciary-500 text-white mt-auto py-6 border-t border-slate-700">
-        <div class="max-w-7xl mx-auto px-4 text-center space-y-2 text-xs">
-            <p class="font-semibold text-sm">Fiduciary-Standard Collegiate Framework</p>
-            <p class="text-slate-400">Class study tools provided exclusively under objective, conflict-free, non-sponsored standard guidelines.</p>
-        </div>
-    </footer>
 
-    <script>
-        // Tab switching logic
+    <!-- 2. STATIC ACADEMIC HANDOUT COMPILER (Prints automatically as a multi-page PDF when user clicks Print/Save) -->
+    <div class="hidden print-only bg-white text-slate-900 p-6 space-y-10 leading-relaxed">
+        
+        <!-- Print Header block -->
+        <div class="border-b-4 border-cyan-800 pb-6 flex justify-between items-start">
+            <div class="space-y-2">
+                <div class="flex items-center gap-3">
+                    <img src="./ALPHAPARTNERS - Copy.png" class="h-10 w-auto" alt="Company Logo">
+                </div>
+                <p class="text-[10px] font-extrabold uppercase tracking-widest text-cyan-800">
+                    Registered Investment Advisor | Legal Fiduciary Standard of Care
+                </p>
+            </div>
+            <div class="text-[10px] text-right space-y-0.5 text-slate-600">
+                <p class="font-extrabold text-slate-900 text-sm val-name">Brian T. Amato, CFF®</p>
+                <p class="text-cyan-700 font-bold val-title">Executive Vice President</p>
+                <p class="val-address">500 N. Broadway, Suite 260<br>Jericho, NY 11753</p>
+                <p>Phone: <span class="val-phone">(516) 932-5130</span></p>
+                <p class="font-bold val-email">info@alphainnovationpartners.com</p>
+            </div>
+        </div>
+
+        <!-- Document Preface -->
+        <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-2">
+            <h2 class="text-xs font-bold text-slate-950 uppercase tracking-wider">
+                Collegiate Financial Independence Seminar Workbook
+            </h2>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+                This academic syllabus is compiled to equip undergraduate college students with robust cash flow, budgeting, and risk-management strategies. Governed by the legal and ethical Fiduciary Standard of Care, this handbook is free from commercial bias and product recommendations.
+            </p>
+        </div>
+
+        <!-- Curriculum Topics (Direct mirror of rich web content) -->
+        <div class="space-y-8 text-xs leading-relaxed text-slate-800">
+            
+            <!-- Module 1 -->
+            <div class="space-y-1">
+                <h3 class="text-xs font-extrabold text-slate-950 uppercase tracking-wider flex items-center gap-2">
+                    <span class="bg-cyan-700 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px]">1</span>
+                    Module 01: The Fiduciary Standard vs. The Hype
+                </h3>
+                <div class="pl-7 space-y-1.5">
+                    <p>
+                        Most conventional financial training guides on university campuses are sponsored by commercial banking networks. These modules act as marketing pipelines to distribute credit cards or investment accounts.
+                    </p>
+                    <p>
+                        As your presenter, we operate under the **Fiduciary Standard of Care**, which is legally governed by the **Duty of Loyalty** and the **Duty of Care**. We are required to put your financial welfare above our advisory goals. We do not accept sales commissions or recommend proprietary products.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Module 2 -->
+            <div class="space-y-1">
+                <h3 class="text-xs font-extrabold text-slate-950 uppercase tracking-wider flex items-center gap-2">
+                    <span class="bg-cyan-700 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px]">2</span>
+                    Module 02: Gross vs. Net Pay & Cash Flow Strategies
+                </h3>
+                <div class="pl-7 space-y-1.5">
+                    <p>
+                        Many young professionals miscalculate their actual cash flow by creating budgets based on their nominal gross salaries. Statutory payroll deductions significantly reduce take-home pay: FICA Taxes deduct 6.2% for Social Security and 1.45% for Medicare, and federal/state progressive income tax codes reduce remaining net income by an additional 15% to 25%.
+                    </p>
+                    <p>
+                        Fiduciaries recommend establishing a **liquid financial firewall** kept strictly isolated from daily checking transaction options. Your first milestone when starting your post-graduate career is maintaining a $1,000 emergency buffer in a High-Yield Savings Account (HYSA) to preserve purchase-power parity against inflation while bypassing predatory debt triggers.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Module 3 -->
+            <div class="space-y-1">
+                <h3 class="text-xs font-extrabold text-slate-950 uppercase tracking-wider flex items-center gap-2">
+                    <span class="bg-cyan-700 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px]">3</span>
+                    Module 03: The FICO Matrix & The Mathematics of Compounding Debt
+                </h3>
+                <div class="pl-7 space-y-1.5">
+                    <p>
+                        Your credit score is an algorithmic prediction of default risk. The scoring engine evaluates five primary aspects: Payment History (35%), Credit Utilization (30%), Length of Credit History (15%), New Credit (10%), and Credit Mix (10%).
+                    </p>
+                    <p>
+                        To optimize your score, your Credit Utilization Ratio (outstanding balances divided by limits) should remain strictly below 30% (ideally under 10%). Carrying active card balances triggers **compound interest**, causing your balances to multiply exponentially:
+                    </p>
+                    <div class="bg-slate-50 p-3 rounded-lg border text-center font-mono text-xs text-slate-900 my-2 max-w-sm mx-auto">
+                        A = P ( 1 + r/n )<sup>nt</sup>
+                    </div>
+                    <p class="font-bold text-slate-900">Numerical Case Study (How Debt Multiplies):</p>
+                    <p>
+                        If you carry a static balance of **$2,500** (P) on a typical student credit card with a high **24% APR** (r = 0.24) compounded monthly (n = 12) for **5 years** (t = 5), and make no payments, the compounded ending balance is computed as:
+                    </p>
+                    <div class="bg-slate-50 p-2.5 rounded border font-mono text-[11px] text-center my-2 max-w-xs mx-auto">
+                        A = 2500 ( 1 + 0.24 / 12 )<sup>12 &times; 5</sup><br>
+                        A = 2500 ( 1.02 )<sup>60</sup><br>
+                        A = 2500 &times; 3.28103<br>
+                        A = <strong class="text-red-700">$8,202.58</strong>
+                    </div>
+                    <p>
+                        You end up paying an extra **$5,702.58** in pure interest—more than double your original principal balance. This highlights why compounding interest can become a severe financial burden.
+                    </p>
+                </div>
+            </div>
+
+            <div class="page-break"></div> <!-- Forced layout split for professional PDF generation -->
+
+            <!-- Module 4 -->
+            <div class="space-y-1">
+                <h3 class="text-xs font-extrabold text-slate-950 uppercase tracking-wider flex items-center gap-2">
+                    <span class="bg-cyan-700 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px]">4</span>
+                    Module 04: Digital Debt Traps & Behavioral Guardrails
+                </h3>
+                <div class="pl-7 space-y-1.5">
+                    <p>
+                        Buy Now, Pay Later (BNPL) providers utilize dark UX patterns that exploit a cognitive bias known as the **Numerosity Effect**. By splitting a large purchase (e.g., $400) into four installments of $100, the platform redirects your focus away from the overall cost to the smaller installment price.
+                    </p>
+                    <p>
+                        This lowers your natural purchasing hesitation, causing you to stack multiple BNPL transactions. Over time, these small installment plans accumulate, quietly draining your weekly cash flow. Fiduciary advice recommends a simple rule of thumb: If you cannot purchase a non-essential item in full using cash today, you cannot afford it.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Module 5 -->
+            <div class="space-y-1">
+                <h3 class="text-xs font-extrabold text-slate-950 uppercase tracking-wider flex items-center gap-2">
+                    <span class="bg-cyan-700 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px]">5</span>
+                    Module 05: Compounding Wealth & Broad-Market Indexing
+                </h3>
+                <div class="pl-7 space-y-1.5">
+                    <p>
+                        While compounding interest works against you in debt, it works as a powerful wealth engine when investing. Investing early lets compound growth act on your principal over a much longer time horizon.
+                    </p>
+                    <p>
+                        To maximize this effect, young investors can prioritize tax-sheltered accounts like a **Roth IRA**. Because contributions use post-tax dollars, your assets accumulate entirely tax-free, and qualifying withdrawals in retirement are also tax-free.
+                    </p>
+                    <p>
+                        Fiduciary investment strategies strongly prioritize low-cost, broad-market index funds over actively managed mutual funds. Active managers charge high expense ratios (often 1.5%+) and frequently underperform the broader market. Low-cost index funds track the overall market for a fraction of the cost (often under 0.05% annually), protecting your wealth from high brokerage fees.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Print Footer Disclaimer -->
+        <div class="mt-12 pt-6 border-t border-slate-200 text-[10px] text-slate-400 text-center space-y-2">
+            <p class="font-bold uppercase tracking-wider text-slate-500">Educational Workbook Disclosure</p>
+            <p>
+                The financial information provided in this workbook is for educational purposes only and does not constitute specific investment advice. Past performance does not guarantee future results. Please consult with a Certified Fiduciary at Alpha Innovation Partners regarding your unique financial situation before making final investment decisions.
+            </p>
+            <p class="font-extrabold text-slate-600 val-company">
+                © 2026 Alpha Innovation Partners. All Rights Reserved.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Interactive Scripts -->
+    <script class="no-print">
+        // Real-time customization controller
+        function updateContactInfo() {
+            const name = document.getElementById('input-name').value || 'Brian T. Amato, CFF®';
+            const title = document.getElementById('input-title').value || 'Executive Vice President';
+            const company = document.getElementById('input-company').value || 'Alpha Innovation Partners';
+            const phone = document.getElementById('input-phone').value || '(516) 932-5130';
+            const email = document.getElementById('input-email').value || 'info@alphainnovationpartners.com';
+            const address = document.getElementById('input-address').value || '500 N. Broadway, Suite 260\nJericho, NY 11753';
+
+            // Propagate input variables automatically to all UI elements
+            document.querySelectorAll('.val-name').forEach(el => el.textContent = name);
+            document.querySelectorAll('.val-title').forEach(el => el.textContent = title);
+            document.querySelectorAll('.val-company').forEach(el => el.textContent = company);
+            document.querySelectorAll('.val-phone').forEach(el => el.textContent = phone);
+            document.querySelectorAll('.val-email').forEach(el => el.textContent = email);
+            document.querySelectorAll('.val-address').forEach(el => {
+                el.innerHTML = address.replace(/\n/g, '<br>');
+            });
+        }
+
+        // Tab selection switcher
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden');
-                content.classList.remove('block');
+                content.classList.remove('active');
             });
             const activeTab = document.getElementById('tab-' + tabId);
             if (activeTab) {
-                activeTab.classList.remove('hidden');
-                activeTab.classList.add('block');
+                activeTab.classList.add('active');
             }
+            
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-fiduciary-accent', 'text-white');
+                btn.classList.remove('bg-brand-navy', 'text-white', 'shadow-xs');
                 btn.classList.add('text-slate-600', 'hover:bg-slate-50', 'hover:text-slate-900');
             });
+            
             const activeBtn = document.getElementById('btn-' + tabId);
             if (activeBtn) {
-                activeBtn.classList.add('bg-fiduciary-accent', 'text-white');
+                activeBtn.classList.add('bg-brand-navy', 'text-white', 'shadow-xs');
                 activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-50');
             }
         }
 
-        // Accordion toggle logic
+        // Accordion switcher
         function toggleAccordion(id) {
             const content = document.getElementById('content-' + id);
             const icon = document.getElementById('icon-' + id);
@@ -330,12 +740,21 @@
             }
         }
 
-        // Dynamic Scenario Switch
+        function showToastNotification(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-text').textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Dynamic Compound Calculator Setup
         function switchScenario() {
             const scenario = document.getElementById('calc-scenario').value;
             if (scenario === 'debt') {
-                document.getElementById('label-principal').textContent = 'Initial Credit Card Balance ($)';
-                document.getElementById('label-rate').textContent = 'Credit Card APR (%)';
+                document.getElementById('label-principal').textContent = 'Starting Balance ($)';
+                document.getElementById('label-rate').textContent = 'Annual Interest Rate / APR (%)';
                 document.getElementById('calc-principal').value = '1000';
                 document.getElementById('calc-rate').value = '22';
                 document.getElementById('calc-years').value = '5';
@@ -349,7 +768,7 @@
             calculateCompound();
         }
 
-        // Compound Math Engine
+        // Safe Compound Interest Calculator Engine
         function calculateCompound() {
             const scenario = document.getElementById('calc-scenario').value;
             const principal = parseFloat(document.getElementById('calc-principal').value) || 0;
@@ -359,23 +778,23 @@
             document.getElementById('years-display').textContent = years;
 
             if (scenario === 'debt') {
-                // CC Debt Compounding: CC compounding against you: A = P * (1 + r/12)^(12*t)
-                const n = 12; // monthly
+                const n = 12; // Compounded monthly
                 const total = principal * Math.pow(1 + (rate / n), n * years);
                 const expansion = total - principal;
 
                 document.getElementById('output-title').textContent = 'Compounding Against You';
-                document.getElementById('out-interest-label').textContent = 'Accumulated Interest Cost:';
-                document.getElementById('interest-color-box').classList.add('text-red-400');
-                document.getElementById('interest-color-box').classList.remove('text-teal-400');
+                document.getElementById('out-interest-label').textContent = 'Total Interest Accumulated:';
+                
+                const box = document.getElementById('interest-color-box');
+                box.classList.add('text-rose-400');
+                box.classList.remove('text-teal-400');
 
                 document.getElementById('out-original').textContent = principal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 document.getElementById('out-interest').textContent = expansion.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 document.getElementById('out-total').textContent = total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                document.getElementById('out-explanation').textContent = `Without making active principal repayments, your credit card balance of $${principal.toLocaleString()} will compound at ${rate*100}% APR, expanding to a massive $${total.toLocaleString(undefined, {maximumFractionDigits:0})} over ${years} years.`;
+                document.getElementById('out-explanation').textContent = `Carrying a balance of $${principal.toLocaleString()} at an average card rate of ${rate*100}% APR causes debt to multiply over ${years} years, expanding the terminal total to $${total.toLocaleString(undefined, {maximumFractionDigits:2})}.`;
             } else {
-                // Systematic Savings Compounding: A = PMT * [((1 + r/12)^(12*t) - 1) / (r/12)]
-                const n = 12; // monthly deposits
+                const n = 12; // Monthly investments
                 const monthlyRate = rate / n;
                 const totalMonths = n * years;
                 
@@ -390,59 +809,58 @@
                 const interestEarned = total - totalContributions;
 
                 document.getElementById('output-title').textContent = 'Compounding For You';
-                document.getElementById('out-interest-label').textContent = 'Earned Compound Growth:';
-                document.getElementById('interest-color-box').classList.remove('text-red-400');
-                document.getElementById('interest-color-box').classList.add('text-teal-400');
+                document.getElementById('out-interest-label').textContent = 'Compound Wealth Expansion:';
+                
+                const box = document.getElementById('interest-color-box');
+                box.classList.remove('text-rose-400');
+                box.classList.add('text-teal-400');
 
                 document.getElementById('out-original').textContent = totalContributions.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 document.getElementById('out-interest').textContent = interestEarned.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 document.getElementById('out-total').textContent = total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                document.getElementById('out-explanation').textContent = `By systematically investing $${principal}/month at a conservative ${rate*100}% annual market return, your total capital contributions of $${totalContributions.toLocaleString()} will generate an extra $${interestEarned.toLocaleString(undefined, {maximumFractionDigits:0})} in compounding growth over ${years} years.`;
+                document.getElementById('out-explanation').textContent = `By systematically contributing $${principal}/month at a steady ${rate*100}% market return, you generate a major wealth growth of $${interestEarned.toLocaleString(undefined, {maximumFractionDigits:2})} over a ${years}-year period.`;
             }
         }
 
-        // Actionable Study Guide Compiler and Downloader
-        function downloadStudyGuide() {
-            const content = `# CLASS STUDY GUIDE: STRATEGIC COLLEGIATE FINANCIAL INDEPENDENCE
+        // Dynamically compiles a beautiful Rich-Text file (.doc) directly from DOM nodes (No syntax vulnerabilities!)
+        function downloadWordDoc() {
+            const name = document.getElementById('input-name').value;
+            const title = document.getElementById('input-title').value;
+            const company = document.getElementById('input-company').value;
+            const phone = document.getElementById('input-phone').value;
+            const email = document.getElementById('input-email').value;
+            const address = document.getElementById('input-address').value.replace(/\n/g, ', ');
 
-## 01. The Fiduciary Filter
-- **The Core Rule**: Never rely blindly on financial sales advice or commercial finfluencers. Always ask: "How are you paid?" Fiduciary advisors have a legal duty of loyalty and care to prioritize you.
-- **Action Step**: Disclose fee transparency. Avoid commission-based investment brokers.
+            const headerHTML = "<h1>" + company + "</h1><h3>Registered Investment Advisor</h3>" +
+                               "<p>Presenter: " + name + " (" + title + ")</p>" +
+                               "<p>Contact: " + phone + " | " + email + " | " + address + "</p><hr/>";
 
-## 02. Cash Flow Blueprint
-- **The Core Rule**: Gross salary does not match your net take-home paycheck. Taxes, FICA, and benefits are automatically deducted.
-- **Action Step**: Establish a separate high-yield savings account (HYSA) to hold a $1,000 emergency fund firewall.
+            let contentHTML = "";
+            for (let i = 1; i <= 5; i++) {
+                const headerText = document.querySelector("#handbook-content > div:nth-child(" + i + ") button").innerText;
+                const bodyText = document.getElementById("content-" + i).innerHTML;
+                contentHTML += "<h2>" + headerText + "</h2>" + bodyText + "<br/><hr/>";
+            }
 
-## 03. Credit Score Architecture
-- **The Core Rule**: FICO scores are dictated by Payment History (35%) and Amounts Owed/Utilization (30%). Keeping balances below 30% (ideally 10%) maximizes borrowing capacity.
-- **Compounding Penalty**: Credit cards compound monthly. A $1,000 balance at 22% APR with zero payments swells to $2,971.01 in 5 years!
-
-## 04. Modern Digital Hazards
-- **The Core Rule**: Buy Now, Pay Later (BNPL) structures lower cost perception via the "numerosity effect." Small installment plans stack into unmanageable monthly liabilities.
-- **Action Step**: Track expenses on a single unified sheet; avoid multiple active checkout loans.
-
-## 05. The Intertemporal Wealth Engine
-- **The Core Rule**: Time is your greatest financial asset. Compounding over a 30-year horizon creates massive growth.
-- **Action Step**: Open a Roth IRA to grow your assets completely tax-free, and focus on low-cost, diversified index funds.`;
-
-            const blob = new Blob([content], { type: 'text/markdown' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'Fiduciary_Financial_Literacy_Guide.md';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            // Toast feedback
-            const toast = document.getElementById('toast');
-            toast.classList.remove('hidden');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 3000);
+            const completeHTML = "<html><head><meta charset='utf-8'><title>Workbook</title></head><body>" + headerHTML + contentHTML + "</body></html>";
+            
+            const blob = new Blob(['\ufeff' + completeHTML], {
+                type: 'application/msword'
+            });
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Collegiate_Financial_Literacy_Workbook.doc';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToastNotification("Word Guide downloaded successfully!");
         }
 
-        // Initialize calculator
+        // Init routines
         window.onload = function() {
+            updateContactInfo();
             calculateCompound();
         }
     </script>
