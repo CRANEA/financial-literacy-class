@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiduciary Blueprint: Financial Literacy Command Center</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        fiduciary: {
+                            50: '#f0f5fa',
+                            100: '#e1ebf5',
+                            500: '#1e3a8a', // Deep Navy
+                            600: '#172554', // Darker Navy
+                            700: '#0f172a', // Slate Dark
+                            accent: '#d97706', // Fiduciary Gold / Amber
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-fiduciary-50 text-fiduciary-700 min-h-screen flex flex-col">
+
+    <!-- Header Banner -->
+    <header class="bg-fiduciary-600 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="bg-fiduciary-accent text-white p-3 rounded-lg shadow-inner">
+                    <i class="fa-solid fa-scale-balanced text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight">Collegiate Financial Literacy Command Center</h1>
+                    <p class="text-sm text-blue-200">A Fiduciary's Resource Guide & NotebookLM Prompt Kit</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="bg-fiduciary-500 text-xs text-blue-100 px-3 py-1.5 rounded-full font-semibold border border-blue-400">
+                    Target: College Undergrads
+                </span>
+                <span class="bg-green-600 text-xs text-white px-3 py-1.5 rounded-full font-semibold">
+                    Interactive Workshop
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- App Container -->
+    <div class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-8">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-full lg:w-64 flex-shrink-0">
+            <nav class="space-y-1 bg-white p-4 rounded-xl shadow-sm border border-gray-200 sticky top-8">
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-2">Navigation</p>
+                
+                <button onclick="switchTab('dashboard')" id="btn-dashboard" class="tab-btn w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg bg-fiduciary-500 text-white transition-all duration-150">
+                    <i class="fa-solid fa-chart-pie mr-3 text-lg w-5"></i>
+                    Gen Z Stat Room
+                </button>
+
+                <button onclick="switchTab('timeline')" id="btn-timeline" class="tab-btn w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all duration-150">
+                    <i class="fa-solid fa-clock-rotate-left mr-3 text-lg w-5"></i>
+                    60-Min Curriculum
+                </button>
+
+                <button onclick="switchTab('calculator')" id="btn-calculator" class="tab-btn w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all duration-150">
+                    <i class="fa-solid fa-calculator mr-3 text-lg w-5"></i>
+                    Interactive Math Lab
+                </button>
+
+                <button onclick="switchTab('prompts')" id="btn-prompts" class="tab-btn w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all duration-150">
+                    <i class="fa-solid fa-robot mr-3 text-lg w-5"></i>
+                    NotebookLM Prompts
+                </button>
+
+                <div class="pt-4 mt-4 border-t border-gray-200">
+                    <button onclick="switchTab('github')" id="btn-github" class="tab-btn w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-fiduciary-accent bg-amber-50 hover:bg-amber-100 transition-all duration-150">
+                        <i class="fa-brands fa-github mr-3 text-lg w-5 animate-pulse"></i>
+                        Publish to GitHub!
+                    </button>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-grow bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-200 min-w-0">
+            
+            <!-- Toast notification box -->
+            <div id="toast" class="hidden fixed bottom-5 right-5 bg-fiduciary-600 text-white px-4 py-3 rounded-lg shadow-lg flex items-center space-x-3 z-50 transform translate-y-0 transition-all duration-300">
+                <i class="fa-solid fa-circle-check text-green-400"></i>
+                <span id="toast-text" class="text-sm font-medium">Copied to clipboard!</span>
+            </div>
+
+            <!-- TAB 1: GEN Z STAT ROOM -->
+            <section id="tab-dashboard" class="tab-content block space-y-6">
+                <div class="border-b border-gray-200 pb-4">
+                    <h2 class="text-2xl font-bold text-fiduciary-700">Gen Z Financial Crisis Dashboard</h2>
+                    <p class="text-gray-500">Why a Fiduciary presentation is critically needed for undergraduates right now.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-red-50 p-5 rounded-xl border border-red-100 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-red-600 uppercase tracking-wider">Literacy Rate</span>
+                            <h3 class="text-4xl font-bold text-red-700 mt-1">38%</h3>
+                        </div>
+                        <p class="text-xs text-red-800 mt-4 leading-relaxed">Only 38% of Gen Z can pass a basic financial literacy assessment (compared to 48% of older generations).</p>
+                    </div>
+
+                    <div class="bg-amber-50 p-5 rounded-xl border border-amber-100 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-amber-600 uppercase tracking-wider">Financial Anxiety</span>
+                            <h3 class="text-4xl font-bold text-amber-700 mt-1">74%</h3>
+                        </div>
+                        <p class="text-xs text-amber-800 mt-4 leading-relaxed">74% of college students state that personal finance concerns are a major source of overall stress and anxiety.</p>
+                    </div>
+
+                    <div class="bg-blue-50 p-5 rounded-xl border border-blue-100 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-blue-600 uppercase tracking-wider">The Fiduciary Edge</span>
+                            <h3 class="text-4xl font-bold text-blue-700 mt-1">100%</h3>
+                        </div>
+                        <p class="text-xs text-blue-800 mt-4 leading-relaxed">Fiduciaries represent a standard of total truth, acting exclusively in the student's best interest, bypassing biased commercial products.</p>
+                    </div>
+                </div>
+
+                <!-- Custom visual asset mapping -->
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                    <h3 class="text-lg font-semibold text-fiduciary-600 mb-4 flex items-center">
+                        <i class="fa-solid fa-bullseye text-fiduciary-accent mr-2"></i>
+                        The Fiduciary Narrative Arch
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        To engage college students effectively within a 1-hour session, we move away from boring arithmetic formulas. Instead, we anchor the lessons around three core actionable concepts:
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow-xs border border-gray-100">
+                            <span class="text-sm font-semibold text-fiduciary-accent">1. The Debt Trap</span>
+                            <p class="text-xs text-gray-500 mt-1">Understanding compound interest when it works <i>against</i> you (Credit cards, deferred interest buy-now-pay-later).</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-xs border border-gray-100">
+                            <span class="text-sm font-semibold text-fiduciary-accent">2. Compound Wealth</span>
+                            <p class="text-xs text-gray-500 mt-1">Turning small modern savings habits into major high-yield opportunities early in their career lifecycle.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-xs border border-gray-100">
+                            <span class="text-sm font-semibold text-fiduciary-accent">3. The Fiduciary Filter</span>
+                            <p class="text-xs text-gray-500 mt-1">How to safely differentiate true professional advisors from commercial "finfluencers" selling platforms.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: 60-MINUTE TIMELINE -->
+            <section id="tab-timeline" class="tab-content hidden space-y-6">
+                <div class="border-b border-gray-200 pb-4">
+                    <h2 class="text-2xl font-bold text-fiduciary-700">60-Minute Class Curriculum</h2>
+                    <p class="text-gray-500">Every minute planned out with fiduciary objectives, engagement tactics, and presentation tips.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Module 1 -->
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-24 text-center">
+                            <span class="inline-block bg-fiduciary-100 text-fiduciary-700 text-xs font-bold px-3 py-1.5 rounded-full">
+                                00 - 10 Min
+                            </span>
+                        </div>
+                        <div class="flex-grow bg-white p-5 rounded-xl border border-gray-200 shadow-xs hover:border-fiduciary-500 transition-colors">
+                            <h3 class="font-bold text-lg text-fiduciary-700 flex items-center justify-between">
+                                <span>Module 1: The Fiduciary Standard vs. The Hype</span>
+                                <span class="text-xs text-gray-400">Intro & Diagnostics</span>
+                            </h3>
+                            <p class="text-sm text-gray-600 mt-2">Differentiate between a broker (salesperson) and a true financial fiduciary (advisor). Address financial anxieties and demystify standard terminology.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded">Interactive Live Poll</span>
+                                <span class="bg-amber-50 text-amber-700 text-xs px-2.5 py-1 rounded">Mythbusting</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 2 -->
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-24 text-center">
+                            <span class="inline-block bg-fiduciary-100 text-fiduciary-700 text-xs font-bold px-3 py-1.5 rounded-full">
+                                10 - 25 Min
+                            </span>
+                        </div>
+                        <div class="flex-grow bg-white p-5 rounded-xl border border-gray-200 shadow-xs hover:border-fiduciary-500 transition-colors">
+                            <h3 class="font-bold text-lg text-fiduciary-700 flex items-center justify-between">
+                                <span>Module 2: Credit, Debt & Compound Gravity</span>
+                                <span class="text-xs text-gray-400">Survival Skillset</span>
+                            </h3>
+                            <p class="text-sm text-gray-600 mt-2">Analyze how a $2,000 credit card balance can easily compound to $5,000+ over time. Avoid deferred-interest payment plans and prioritize structural credit card payoffs.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded">Live Compound Calc Demo</span>
+                                <span class="bg-amber-50 text-amber-700 text-xs px-2.5 py-1 rounded">Credit Score Mechanics</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 3 -->
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-24 text-center">
+                            <span class="inline-block bg-fiduciary-100 text-fiduciary-700 text-xs font-bold px-3 py-1.5 rounded-full">
+                                25 - 45 Min
+                            </span>
+                        </div>
+                        <div class="flex-grow bg-white p-5 rounded-xl border border-gray-200 shadow-xs hover:border-fiduciary-500 transition-colors">
+                            <h3 class="font-bold text-lg text-fiduciary-700 flex items-center justify-between">
+                                <span>Module 3: Asset Acceleration & Passive Indexing</span>
+                                <span class="text-xs text-gray-400">Future Building</span>
+                            </h3>
+                            <p class="text-sm text-gray-600 mt-2">Introduce the raw mechanics of Roth IRAs, low-cost index funds, and compound wealth. Map historical returns vs. individual stock hype.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded">Roth IRA Roadmap</span>
+                                <span class="bg-amber-50 text-amber-700 text-xs px-2.5 py-1 rounded">Stock-picking vs. Index Funds</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 4 -->
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-24 text-center">
+                            <span class="inline-block bg-fiduciary-100 text-fiduciary-700 text-xs font-bold px-3 py-1.5 rounded-full">
+                                45 - 60 Min
+                            </span>
+                        </div>
+                        <div class="flex-grow bg-white p-5 rounded-xl border border-gray-200 shadow-xs hover:border-fiduciary-500 transition-colors">
+                            <h3 class="font-bold text-lg text-fiduciary-700 flex items-center justify-between">
+                                <span>Module 4: Your Financial Security Checklist</span>
+                                <span class="text-xs text-gray-400">Action Plan & Q&A</span>
+                            </h3>
+                            <p class="text-sm text-gray-600 mt-2">Establish an emergency cash runway, identify predatory investment fees, and open up an interactive Q&A discussion.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded">Predatory Fee Filter Check</span>
+                                <span class="bg-amber-50 text-amber-700 text-xs px-2.5 py-1 rounded">Interactive Handout</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: QUANTITATIVE LAB -->
+            <section id="tab-calculator" class="tab-content hidden space-y-6">
+                <div class="border-b border-gray-200 pb-4">
+                    <h2 class="text-2xl font-bold text-fiduciary-700">Quantitative Class Demo</h2>
+                    <p class="text-gray-500">Use this live compounding visualizer in front of your class to show how fast credit card interest grows.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Inputs -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 space-y-4">
+                        <h3 class="font-bold text-lg text-fiduciary-600">Calculator Parameters</h3>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Initial Credit Card Balance ($)</label>
+                            <input type="number" id="balance-input" value="2000" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-fiduciary-500" oninput="calculateDebt()">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Credit Card APR (%)</label>
+                            <input type="number" id="apr-input" value="24" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-fiduciary-500" oninput="calculateDebt()">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Time Elapsed Without Payments (Months)</label>
+                            <input type="range" id="months-input" min="6" max="60" value="36" class="w-full accent-fiduciary-accent" oninput="calculateDebt()">
+                            <div class="text-right text-xs font-bold text-fiduciary-accent"><span id="months-display">36</span> Months</div>
+                        </div>
+                    </div>
+
+                    <!-- Outputs & Visualization -->
+                    <div class="bg-fiduciary-700 text-white p-6 rounded-xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg border-b border-fiduciary-500 pb-2 mb-4">Compounded Realities</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-300">Original Balance:</span>
+                                    <span class="font-semibold text-gray-100">$<span id="out-original">2,000.00</span></span>
+                                </div>
+                                <div class="flex justify-between items-center text-red-400">
+                                    <span class="text-sm">Accumulated Interest:</span>
+                                    <span class="font-bold">+$<span id="out-interest">2,039.89</span></span>
+                                </div>
+                                <div class="flex justify-between items-center border-t border-fiduciary-500 pt-3 text-xl font-bold">
+                                    <span>New Balance:</span>
+                                    <span class="text-fiduciary-accent">$<span id="out-total">4,039.89</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-fiduciary-500">
+                            <p class="text-xs text-gray-300 leading-relaxed italic">
+                                "This is what happens when you let compounding work in reverse. Without making a payment, your debt has essentially doubled in <span id="out-months-text">36</span> months."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: NOTEBOOKLM PROMPTS -->
+            <section id="tab-prompts" class="tab-content hidden space-y-6">
+                <div class="border-b border-gray-200 pb-4">
+                    <h2 class="text-2xl font-bold text-fiduciary-700">NotebookLM Creation Suite</h2>
+                    <p class="text-gray-500">Copy these specialized XML-structured prompts directly into NotebookLM to output beautiful support materials.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Prompt 1: Video -->
+                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs">
+                        <div class="bg-fiduciary-600 text-white px-5 py-3 flex justify-between items-center">
+                            <span class="font-bold text-sm"><i class="fa-solid fa-video mr-2 text-fiduciary-accent"></i> 1. Social Video Script Scriptwriting Prompt</span>
+                            <button onclick="copyPrompt('prompt-video')" class="bg-fiduciary-accent hover:bg-amber-600 text-white text-xs px-3 py-1.5 rounded font-semibold flex items-center transition-all">
+                                <i class="fa-regular fa-copy mr-1.5"></i> Copy Prompt
+                            </button>
+                        </div>
+                        <div class="p-5 bg-gray-50 max-h-60 overflow-y-auto font-mono text-xs text-gray-700 border-t border-gray-200 leading-relaxed whitespace-pre-wrap" id="prompt-video">
+&lt;prompt_config&gt;
+  &lt;role&gt;Fiduciary Education Copywriter & Video Strategist&lt;/role&gt;
+  &lt;objective&gt;Draft an engaging, highly viral 60-second video script based on the upload document, targeting college undergraduate students.&lt;/objective&gt;
+  &lt;style_guidelines&gt;
+    - Hook: Use a high-impact diagnostic stat (e.g., "Only 38% of us can pass a money test...").
+    - Pace: Quick-hitting, educational, non-judgmental.
+    - Metaphor: Contrast a standard commercial "finfluencer" seeking brokerage fees vs. a legal Financial Fiduciary who must prioritize the client.
+    - Length: Under 180 words (ideal for standard Reels/TikTok/Short formats).
+    - Engagement: Prompt students to run their personal credit card ratios using the live math lab.
+  &lt;/style_guidelines&gt;
+&lt;/prompt_config&gt;
+
+&lt;context&gt;
+  Use the provided curriculum modules to build the script. Make sure the distinction of a fiduciary is highlighted so they can protect themselves from toxic commercial finance schemes online.
+&lt;/context&gt;</div>
+                    </div>
+
+                    <!-- Prompt 2: Slide Deck -->
+                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs">
+                        <div class="bg-fiduciary-600 text-white px-5 py-3 flex justify-between items-center">
+                            <span class="font-bold text-sm"><i class="fa-solid fa-file-powerpoint mr-2 text-fiduciary-accent"></i> 2. 10-Slide Presentation Outline Prompt</span>
+                            <button onclick="copyPrompt('prompt-slides')" class="bg-fiduciary-accent hover:bg-amber-600 text-white text-xs px-3 py-1.5 rounded font-semibold flex items-center transition-all">
+                                <i class="fa-regular fa-copy mr-1.5"></i> Copy Prompt
+                            </button>
+                        </div>
+                        <div class="p-5 bg-gray-50 max-h-60 overflow-y-auto font-mono text-xs text-gray-700 border-t border-gray-200 leading-relaxed whitespace-pre-wrap" id="prompt-slides">
+&lt;prompt_config&gt;
+  &lt;role&gt;Professional Instructional Designer&lt;/role&gt;
+  &lt;objective&gt;Build a comprehensive 10-slide outline for a 1-hour college presentation.&lt;/objective&gt;
+  &lt;slide_schema&gt;
+    - Slide 1: Welcome & The Legal Oath (What is a Fiduciary?)
+    - Slide 2: The Silent Leak (Gen Z Wealth Loss Data)
+    - Slide 3: Deciphering the Fine Print (Deferred Interest, Credit Cards)
+    - Slide 4: Math Demo: Compounding in Reverse
+    - Slide 5: The Wealth Elevator: Roth IRAs Explained
+    - Slide 6: Passive Indexing vs. Dynamic Speculation
+    - Slide 7: High-Yield Cash Buffers
+    - Slide 8: Sneaky Investment Fees & Filters
+    - Slide 9: Actionable 30-Day Blueprint Checklist
+    - Slide 10: Live QA Frame
+  &lt;/slide_schema&gt;
+  &lt;requirements&gt;
+    Include speaker's direct engagement notes, visual suggestions, and key vocabulary for every slide.
+  &lt;/requirements&gt;
+&lt;/prompt_config&gt;</div>
+                    </div>
+
+                    <!-- Prompt 3: Infographic -->
+                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-xs">
+                        <div class="bg-fiduciary-600 text-white px-5 py-3 flex justify-between items-center">
+                            <span class="font-bold text-sm"><i class="fa-solid fa-circle-info mr-2 text-fiduciary-accent"></i> 3. Infographic Blueprint Prompt</span>
+                            <button onclick="copyPrompt('prompt-infographic')" class="bg-fiduciary-accent hover:bg-amber-600 text-white text-xs px-3 py-1.5 rounded font-semibold flex items-center transition-all">
+                                <i class="fa-regular fa-copy mr-1.5"></i> Copy Prompt
+                            </button>
+                        </div>
+                        <div class="p-5 bg-gray-50 max-h-60 overflow-y-auto font-mono text-xs text-gray-700 border-t border-gray-200 leading-relaxed whitespace-pre-wrap" id="prompt-infographic">
+&lt;prompt_config&gt;
+  &lt;role&gt;Visual Communication Architect&lt;/role&gt;
+  &lt;objective&gt;Provide a structured visual blueprint for a printable 1-page financial literacy infographic.&lt;/objective&gt;
+  &lt;sections&gt;
+    - Header: The Fiduciary Roadmap for Undergraduates.
+    - Side-by-Side: Commercial Advice vs. True Fiduciary Advice.
+    - Flowchart: The Wealth Engine Flowchart (High Yield Savings -> Employer Match -> Roth IRA -> Index Funds).
+    - Callout Panel: The "Red Flags of Predatory Advice" (Look for hidden sales commissions, high expense ratios, and pushy brokers).
+  &lt;/sections&gt;
+&lt;/prompt_config&gt;</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: GITHUB DEPLOYMENT GUIDE -->
+            <section id="tab-github" class="tab-content hidden space-y-6">
+                <div class="border-b border-gray-200 pb-4">
+                    <h2 class="text-2xl font-bold text-fiduciary-700">How to Publish This Website on GitHub (For Free!)</h2>
+                    <p class="text-gray-500">Go from a raw text file to a live public website in under 5 minutes without writing any extra server hosting code.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Guide Steps -->
+                    <div class="space-y-4">
+                        <h3 class="font-bold text-lg text-fiduciary-accent flex items-center">
+                            <i class="fa-brands fa-github mr-2"></i> Step-by-Step Hosting Guide
+                        </h3>
+                        
+                        <div class="relative pl-8 border-l-2 border-gray-200 space-y-6">
+                            <!-- Step 1 -->
+                            <div class="relative">
+                                <div class="absolute -left-[41px] top-0.5 bg-fiduciary-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">1</div>
+                                <h4 class="font-bold text-sm text-gray-800">Create a GitHub Account</h4>
+                                <p class="text-xs text-gray-500 mt-1">Go to <a href="https://github.com" target="_blank" class="text-blue-600 underline">GitHub.com</a> and sign up or sign in. It is completely free for hosting web files.</p>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="relative">
+                                <div class="absolute -left-[41px] top-0.5 bg-fiduciary-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">2</div>
+                                <h4 class="font-bold text-sm text-gray-800">Create a New Repository</h4>
+                                <p class="text-xs text-gray-500 mt-1">Click the <strong class="text-gray-700">"New"</strong> button on the left sidebar to create a repository. Name it something simple like <code class="bg-gray-100 text-red-600 px-1 py-0.5 rounded text-[11px]">financial-class</code>.</p>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="relative">
+                                <div class="absolute -left-[41px] top-0.5 bg-fiduciary-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">3</div>
+                                <h4 class="font-bold text-sm text-gray-800">Upload index.html</h4>
+                                <p class="text-xs text-gray-500 mt-1">Click the <strong class="text-gray-700">"uploading an existing file"</strong> link. Take this code file (saved as <strong class="text-gray-700">index.html</strong>) and drag it into the box. Scroll down and click <strong class="text-gray-700">"Commit changes"</strong>.</p>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="relative">
+                                <div class="absolute -left-[41px] top-0.5 bg-fiduciary-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">4</div>
+                                <h4 class="font-bold text-sm text-gray-800">Turn on GitHub Pages</h4>
+                                <p class="text-xs text-gray-500 mt-1">Go to the repository <strong class="text-gray-700">Settings</strong> (the gear icon on the top tab) -> click <strong class="text-gray-700">Pages</strong> in the left sidebar menu. Under Branch, set it to <strong class="text-gray-700">main</strong> and root folder (<strong class="text-gray-700">/</strong>), then click <strong class="text-gray-700">Save</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sandbox Graphic / Action Center -->
+                    <div class="bg-fiduciary-50 p-6 rounded-xl border border-fiduciary-100 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-fiduciary-600 flex items-center mb-4">
+                                <i class="fa-solid fa-circle-nodes text-fiduciary-accent mr-2"></i>
+                                Live Web Benefits
+                            </h3>
+                            <ul class="space-y-3 text-xs text-gray-600 leading-relaxed">
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-check text-green-600 mr-2 mt-0.5"></i>
+                                    <span><strong>Present Directly from the Web:</strong> Access your interactive financial slides and dashboard from any classroom computer by typing in your customized link.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-check text-green-600 mr-2 mt-0.5"></i>
+                                    <span><strong>Interactive Classroom Demos:</strong> Share the URL directly with students on the syllabus so they can run calculations on their phones.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-check text-green-600 mr-2 mt-0.5"></i>
+                                    <span><strong>Professional Portfolio Piece:</strong> Showcase your instructional expertise with a beautifully deployed online assets page.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-6 bg-white p-4 rounded-lg border border-gray-200">
+                            <span class="text-xs font-semibold text-gray-400 block mb-1">Your Future Live URL will look like:</span>
+                            <code class="text-xs text-fiduciary-accent font-mono font-bold block overflow-x-auto whitespace-nowrap bg-fiduciary-50 p-2 rounded">
+                                https://[YOUR_USERNAME].github.io/financial-class/
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-fiduciary-700 text-white mt-auto py-6 border-t border-fiduciary-600">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p class="text-sm">Designed for Fiduciary Educators. Feel free to copy, modify, and present this to students.</p>
+            <p class="text-xs text-gray-400">Personal finance educational material built under unbiased fiduciary principles.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic & Tab Switching Scripts -->
+    <script>
+        // Tab switcher
+        function switchTab(tabId) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+                content.classList.remove('block');
+            });
+
+            // Show target tab content
+            const activeTab = document.getElementById('tab-' + tabId);
+            if (activeTab) {
+                activeTab.classList.remove('hidden');
+                activeTab.classList.add('block');
+            }
+
+            // Update navigation button states
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-fiduciary-500', 'text-white');
+                btn.classList.add('text-gray-600', 'hover:bg-gray-50', 'hover:text-gray-900');
+            });
+
+            // Check if special style is needed for the yellow github button
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if (activeBtn) {
+                if (tabId === 'github') {
+                    activeBtn.classList.remove('text-fiduciary-accent', 'bg-amber-50');
+                    activeBtn.classList.add('bg-fiduciary-accent', 'text-white');
+                } else {
+                    activeBtn.classList.add('bg-fiduciary-500', 'text-white');
+                    activeBtn.classList.remove('text-gray-600', 'hover:bg-gray-50');
+                    
+                    // Reset github button styling if we switch off it
+                    const ghBtn = document.getElementById('btn-github');
+                    ghBtn.classList.remove('bg-fiduciary-accent', 'text-white');
+                    ghBtn.classList.add('text-fiduciary-accent', 'bg-amber-50', 'hover:bg-amber-100');
+                }
+            }
+        }
+
+        // Copy Clipboard Helper
+        function copyPrompt(elementId) {
+            const promptText = document.getElementById(elementId).innerText;
+            
+            // Textarea workaround for cross-iframe safety
+            const tempTextarea = document.createElement('textarea');
+            tempTextarea.value = promptText;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast("Copied to clipboard successfully!");
+                } else {
+                    showToast("Failed to copy code.");
+                }
+            } catch (err) {
+                showToast("Error during copying process.");
+            }
+            
+            document.body.removeChild(tempTextarea);
+        }
+
+        // Custom notification trigger
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toast-text');
+            
+            toastText.textContent = message;
+            toast.classList.remove('hidden');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Interactive Debt Compound Calculator Formula
+        function calculateDebt() {
+            const principal = parseFloat(document.getElementById('balance-input').value) || 0;
+            const apr = (parseFloat(document.getElementById('apr-input').value) || 0) / 100;
+            const months = parseInt(document.getElementById('months-input').value) || 12;
+
+            document.getElementById('months-display').textContent = months;
+
+            // Monthly rate calculation
+            const monthlyRate = apr / 12;
+
+            // Compound calculation (Assuming zero minimum monthly payments during period to show full compound gravity impact)
+            const totalBalance = principal * Math.pow(1 + monthlyRate, months);
+            const accumulatedInterest = totalBalance - principal;
+
+            // Update UI elements with proper formatting
+            document.getElementById('out-original').textContent = principal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('out-interest').textContent = accumulatedInterest.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('out-total').textContent = totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('out-months-text').textContent = months;
+        }
+
+        // Init calculations
+        window.onload = function() {
+            calculateDebt();
+        }
+    </script>
+</body>
+</html>
